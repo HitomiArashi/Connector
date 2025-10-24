@@ -1,0 +1,1234 @@
+/*
+Basic knowledge of CSS3.
+CSS stand for Cascading Style Sheets.
+It is used to style HTML elements with colors, fonts, layouts, and more.
+CSS can be applied inline, internally within a <style> tag, or externally through a .css file.
+Selectors are used to target HTML elements, and properties define the styles applied to those elements.
+
+During this session, we will cover:
+1. Basic CSS syntax and selectors (or how to code CSS).
+2. Simple styling with fonts, colors, and backgrounds.
+3. Background images and opacity styling.
+4. Positioning elements using CSS.
+5. Pseudo-classes and pseudo-elements.
+
+Why do we need CSS?
+We need to be clear that every browser has its own default styles and supported tags for HTML elements, which can lead to inconsistencies across different browsers. CSS allows us to override these defaults and create a consistent look and feel for our web pages. Another reason is that CSS separates content from presentation, making it easier to maintain and update styles without affecting the HTML structure. Lastly, CSS enables responsive design, allowing web pages to adapt to different screen sizes and devices.
+In general, CSS is essential for creating visually appealing and user-friendly web pages, enhancing the overall user experience.
+*/
+
+/* Basic CSS Syntax */
+/*
+Clearly, HTML supports edit style within their codes and commands. For example:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Web Page</title>
+    <style>
+        body {
+            background-color: lightblue;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+</html>
+
+This code snippet demonstrates how to use the <style> tag to apply CSS styles directly within an HTML document. The styles defined within the <style> tag will apply to the elements on the page, such as setting the background color of the body, changing the text color, and defining font properties for headings and paragraphs, which is a common practice in web development. But it is not recommended to use inline styles in HTML as it can lead to messy code and make it harder to maintain. Therefore, another way to apply style in HTML code has appeared:
+
+<h1 style="color: blue; font-size: 24px;">Hello World</h1>
+
+This is an example of inline CSS, where styles are applied directly to an HTML element using the `style` attribute. While this method works, it is generally better to use internal or external stylesheets for better organization and maintainability of your code. Still, this method is useful for quick styling or testing purposes, but it is not recommended for production code as it can lead to duplication and make it harder to manage styles across multiple pages. That is when we use external CSS files.
+
+CSS defined generic rules that can be applied to multiple elements. This is how to define a CSS rule:
+selector {
+    property: value;
+}
+For example, to change the color of all paragraphs to blue, you would write:
+*/
+
+h1 {
+    color: blue;
+}
+
+/*
+This rule targets all `<h1>` elements and sets their text color to blue. The selector (`h1`) identifies the elements to style, and the property (`color`) defines what aspect of the element to change, with the value (`blue`) specifying the new color. This is a fundamental concept in CSS, allowing developers to apply consistent styles across multiple elements without repeating code.
+*/
+
+/*
+Another basic yet important syntax in CSS are brackets `{}` and semicolons `;`.
+Brackets are used to group CSS rules together, while semicolons are used to separate individual property declarations within a rule. For example:
+*/
+
+h1 {
+    color: blue; /* This sets the text color of h1 elements to blue */
+    font-size: 24px; /* This sets the font size of h1 elements to 24 pixels */
+}
+
+/*
+In this example, the brackets `{}` enclose the CSS rules for the `h1` element, and each property declaration is separated by a semicolon `;`. This syntax allows for clear organization of styles, making it easier to read and maintain the CSS code. It is essential to remember that every property declaration must end with a semicolon, except for the last one in a block, although it is considered good practice to include it for consistency.
+
+Using brackets and semicolons correctly can make a BIG difference between a well-structured CSS file and a messy one. It helps in organizing the code, making it easier to read and maintain. Additionally, it prevents syntax errors that can occur if semicolons are omitted or misplaced.
+*/
+
+/*
+After defined the CSS rules, you can apply them to your HTML elements. For example, if you have an HTML file with a heading and a paragraph, you can link the CSS file to the HTML file using the `<link>` tag in the `<head>` section of your HTML document:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Web Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+Once the CSS file is linked, the styles defined in the CSS file will be applied to the corresponding HTML elements. This separation of concerns allows for cleaner and more maintainable code, as you can easily update styles without modifying the HTML structure.
+*/
+
+/*
+Cascading part of CSS refers to the way styles are applied based on their specificity and order of appearance. When multiple styles apply to the same element, the browser determines which style to use based on the following rules:
+1. Inline styles have the highest priority and will override any styles defined in internal or external stylesheets.
+2. Internal styles (defined within a `<style>` tag in the HTML document) have a lower priority than inline styles but higher than external styles.
+3. External styles (defined in a separate CSS file linked to the HTML document) have the lower priority than internal styles and higher than browser default.
+4. Browser default styles are applied if no other styles are specified.
+This cascading nature allows developers to create complex stylesheets that can be easily managed and overridden as needed.
+
+Another problem with this is "What if one selector is defined in two different CSS files?" In this case, the browser will apply the styles based on the order in which the CSS files are linked in the HTML document. The last defined style will take precedence, allowing for flexibility in managing styles across multiple files. This also applied to the case where the same selector is defined multiple times within a single CSS file. The last occurrence of the selector will override any previous definitions, ensuring that the most recent styles are applied to the elements. This is known as "rule precedence" in CSS, and it allows developers to create modular and maintainable stylesheets by organizing styles logically and hierarchically.
+
+But what if we want to override the default styles of a browser? In this case, we can use the `!important` declaration to force a style to take precedence over any other styles, including inline styles. For example:
+*/
+
+h2 {
+    color: red !important; /* This will override any other color styles applied to h1 elements */
+}
+
+/*
+This declaration tells the browser to apply the red color to all `h1` elements, regardless of any other styles that may be defined elsewhere. However, it is generally recommended to use `!important` sparingly, as it can make debugging and maintaining styles more difficult. Instead, try to use more specific selectors or reorganize your styles to achieve the desired effect without resorting to `!important`. This practice helps maintain a clean and manageable CSS codebase, making it easier for developers to understand and modify styles in the future.
+*/
+
+/*
+Simple Styling with Fonts, Colors, and Backgrounds
+In CSS, you can style HTML elements using various properties to change their appearance. Here are some common properties used for styling fonts, colors, and backgrounds:
+
+==Font Properties==
+- `font-family`: Specifies the font to be used for an element. You can use generic font families like `serif`, `sans-serif`, or specific fonts like `Arial`, `Times New Roman`, etc
+- `font-size`: Sets the size of the font. You can use absolute units like `px` (pixels) or relative units like `em`, `rem`, or percentages.
+- `font-weight`: Defines the thickness of the font. Common values are `normal`, `bold`, `bolder`, and numeric values like `100`, `200`, etc.
+- `font-style`: Sets the style of the font, such as `normal`, `italic`, or `oblique`.
+- `font-variant`: Controls the use of small-caps or other font variations.
+- `font-stretch`: Expands or condenses the font width, with values like `normal`, `condensed`, or `expanded`.
+- `font-kerning`: Controls the spacing between letters, with values like `auto`, `normal`, or `none`.
+- `font-variant-caps`: Controls capitalization, with values like `normal`, `small-caps`, or `all-small-caps`.
+- `font-variant-ligatures`: Controls ligatures, with values like `normal`, `none`, or `common-ligatures`.
+- `font-variant-numeric`: Controls numeric glyphs, with values like `lining-nums`, `oldstyle-nums`, or `proportional-nums`.
+- `font-feature-settings`: Allows for advanced typographic features, such as ligatures or stylistic alternates.
+- `line-height`: Sets the space between lines of text, which can improve readability.
+- `letter-spacing`: Sets the space between characters, which can enhance the visual appearance of text.
+- `word-spacing`: Sets the space between words, which can also improve readability.
+- `text-transform`: Controls capitalization, with values like `uppercase`, `lowercase`, or `capitalize`.
+- `font`: A shorthand property that combines several font properties into one declaration, such as `font: italic small-caps bold 24px/1.5 'Arial', sans-serif;`.
+*/
+
+/* Example of using font properties */
+h3 {
+    font-family: 'Arial', sans-serif;        /* Sets the typeface */
+    font-size: 24px;                         /* Sets the font size */
+    font-weight: bold;                       /* Sets the font weight */
+    font-style: italic;                      /* Sets the font style */
+    font-variant: small-caps;                /* Enables small-caps */
+    line-height: 1.5;                        /* Sets line height */
+    letter-spacing: 2px;                     /* Sets space between letters */
+    word-spacing: 4px;                       /* Sets space between words */
+    text-transform: uppercase;               /* Transforms text to uppercase */
+}
+
+/* Example of using font shorthand */
+h4 {
+    font: italic small-caps bold 20px/1.5 'Arial', sans-serif; /* Shorthand for multiple font properties */
+}
+
+/*
+==Color Properties==
+- `color`: Sets the text color of an element. You can use named colors, hexadecimal values (e.g., `#ff0000` for red), RGB values (e.g., `rgb(255, 0, 0)`), or HSL values (e.g., `hsl(0, 100%, 50%)`).
+- `background-color`: Sets the background color of an element, using the same color formats as `color`.
+- `border-color`: Sets the color of an element's border, which can also use named colors, hexadecimal values, RGB values, or HSL values.
+- `outline-color`: Sets the color of an element's outline, which is similar to border color.
+- `text-decoration-color`: Sets the color of text decorations, such as underlines or overlines.
+- `box-shadow`: Allows you to add shadows to elements, including color, offset, blur radius, and spread radius. For example, `box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);` adds a shadow with a slight offset and blur.
+- `text-shadow`: Adds shadows to text, with similar properties as `box-shadow`. For example, `text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);` adds a subtle shadow to the text.
+*/
+
+/* Example of using color properties */
+h3 {
+    color: #333;                             /* Sets text color to dark gray */
+    background-color: #f0f0f0;              /* Sets background color to light gray */
+    border: 1px solid #ccc;                  /* Sets border color to light gray */
+    outline: 2px solid #ff0000;              /* Sets outline color to red */
+    text-decoration: underline;               /* Underlines the text */
+    text-decoration-color: #0000ff;          /* Sets underline color to blue */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Adds a subtle text shadow */
+}
+
+/* Example of using color shorthand */
+h4 {
+    color: rgb(0, 128, 0);                   /* Sets text color to green using RGB */
+    background-color: hsl(120, 100%, 50%);   /* Sets background color to green using HSL */
+    border-color: #ff0000;                   /* Sets border color to red */
+    outline-color: rgba(255, 165, 0, 0.5);   /* Sets outline color to semi-transparent orange */
+}
+
+/*
+There are some important things to note about color properties in CSS:
+1. Color values can be specified in various formats, including named colors, hexadecimal values, RGB values, and HSL values. This flexibility allows developers to choose the format that best suits their needs.
+2. When using hexadecimal values, the format is `#RRGGBB`, where `RR`, `GG`, and `BB` represent the red, green, and blue components of the color, respectively. For example, `#ff0000` represents red, while `#00ff00` represents green.
+3. RGB values are specified as `rgb(red, green, blue)`, where each component can range from 0 to 255. For example, `rgb(255, 0, 0)` represents red, while `rgb(0, 255, 0)` represents green.
+4. HSL values are specified as `hsl(hue, saturation, lightness)`, where `hue` is the color angle (0-360 degrees), `saturation` is the percentage of color intensity (0-100%), and `lightness` is the percentage of lightness (0-100%). For example, `hsl(120, 100%, 50%)` represents a pure green color.
+5. CSS also supports transparency using the `rgba` and `hsla` formats, where the `a` stands for alpha (opacity). For example, `rgba(255, 0, 0, 0.5)` represents a semi-transparent red color, while `hsla(120, 100%, 50%, 0.5)` represents a semi-transparent green color.
+6. When using color properties, it is essential to ensure that the chosen colors provide sufficient contrast for readability and accessibility. This is especially important for text color and background color combinations, as low contrast can make text difficult to read for users with visual impairments or color blind.
+
+There are tools that quantify the contrast between text and its background:
+- https://wave.webaim.org/
+- https://webaim.org/resources/contrastchecker/
+
+IMPORTANT: Do not use color alone to convey information, as this can create accessibility issues for users with visual impairments or color blindness. Always provide alternative text or visual cues to ensure that all users can access the information presented on your web page.
+*/
+
+/*
+==Background Properties==
+- `background-image`: Sets an image as the background of an element. You can use a URL to specify the image file, such as `background-image: url('image.jpg');`.
+- `background-repeat`: Controls how the background image is repeated. Common values are `repeat`, `no-repeat`, `repeat-x`, and `repeat-y`.
+- `background-size`: Specifies the size of the background image, with values like `cover`, `contain`, or specific dimensions (e.g., `100px 100px`).
+- `background-position`: Sets the position of the background image within the element, using values like `top`, `bottom`, `left`, `right`, or specific coordinates (e.g., `50% 50%`).
+- `background-attachment`: Controls whether the background image scrolls with the page or remains fixed. Values include `scroll`, `fixed`, and `local`.
+- `background-clip`: Defines the area where the background is painted, with values like `border-box`, `padding-box`, and `content-box`.
+- `background-origin`: Specifies the background positioning area, with values like `border-box`, `padding-box`, and `content-box`.
+- `background`: A shorthand property that combines multiple background properties into one declaration, such as `background: url('image.jpg') no-repeat center center / cover;`.
+*/
+
+/* Example of using background properties */
+h3 {
+    background-image: url('background.jpg'); /* Sets a background image */
+    background-repeat: no-repeat;             /* Prevents the image from repeating */
+    background-size: cover;                   /* Scales the image to cover the entire element */
+    background-position: center;              /* Centers the background image */
+    background-attachment: fixed;             /* Keeps the background fixed while scrolling */
+}
+
+/*
+Example of using background shorthand
+*/
+h4 {
+    background: url('background.jpg') no-repeat center center / cover; /* Shorthand for background properties */
+}
+
+/*
+Background images can be used to enhance the visual appeal of a web page, and CSS provides various properties to control how these images are displayed. By using properties like `background-image`, `background-repeat`, `background-size`, and `background-position`, you can create visually engaging backgrounds that complement your content. Additionally, the `background-attachment` property allows you to create fixed backgrounds that remain in place while the rest of the page scrolls, adding depth and interest to your design.
+*/
+
+/*
+==Styling text==
+There are many options for styling text in CSS, allowing you to create visually appealing and readable content. Here are some common text styling properties:
+- `font-family`, 'font-style', 'font-variant', `font-size`, etc.
+- `color`, 'background-color', `border-color`, `outline-color`, etc.
+- `text-align`: Sets the horizontal alignment of text within an element, with values like `left`, `right`, `center`, and `justify`.
+- `text-decoration`: Adds decorative lines to text, such as `underline`, `overline`, `line-through`, or `none`.
+- `line-height`: Sets the height of a line of text, which can improve readability and spacing between lines.
+
+1. 'font-family'
+    - Font family is the style of the text, which can be set by using 'font-family' property in CSS.
+        ```css
+        h1 {
+            font-family: 'Arial', 'Sans-serif';
+        }
+        ```
+    - There are various font families available, such as Arial, Times New Roman, Verdana, etc.
+    - Although there are a lot of font families available, not every browser supports all of them.
+        -> Can provide alternatives:
+        ```css
+        h1 {
+            font-family: 'Arial', 'Helvetica', 'Sans-serif';
+        }
+        ```
+    -There are also font families that are not as user-friendly, and you should use 'sans-serif' when possible.
+    -To expand beyond 'web-safe' fonts, use '@font-face'
+        ```css
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url('mycustomfont.woff2') format('woff2');
+        }
+        h1 {
+            font-family: 'MyCustomFont', sans-serif;
+        }
+        ```
+2. 'font-style'
+    - Font style is the style of the text, which can be set by using 'font-style' property in CSS.
+        ```css
+        h1 {
+            font-style: italic;
+        }
+        ```
+    - Common values for 'font-style' include 'normal', 'italic', and 'oblique'.
+    - It is often used to emphasize text or create a specific visual effect.
+    - You can combine 'font-style' with other font properties to create a cohesive design.
+3. 'font-variant'
+    - Font variant is the style of the text, which can be set by using 'font-variant' property in CSS.
+        ```css
+        h1 {
+            font-variant: small-caps;
+        }
+        ```
+    - Common values for 'font-variant' include 'normal', 'small-caps', and 'all-small-caps'.
+    - It is often used to create a specific visual effect or to emphasize text.
+    - You can combine 'font-variant' with other font properties to create a cohesive design.
+4. 'font-size'
+    - Font size is the size of the text, which can be set by using 'font-size' property in CSS.
+        ```css
+        h1 {
+            font-size: 24px;
+        }
+        ```
+    - There are some options for font size:
+        - xx-small, x-small, small, smaller
+        - medium
+        - large, x-large, xx-large, larger
+        - Use pixel(px), em, rem, or percentage values for more precise control.
+5. 'color' and 'background-color'
+    - Color is the color of the text, which can be set by using 'color' property in CSS.
+        ```css
+        h1 {
+            color: blue;
+        }
+        ```
+    - Background color is the color of the background, which can be set by using 'background-color' property in CSS.
+        ```css
+        h1 {
+            background-color: lightblue;
+        }
+        ```
+    - You can use named colors, hexadecimal values, RGB values, or HSL values to specify colors.
+    - It is important to ensure sufficient contrast between text and background colors for readability.
+6. 'text-align'
+    - Text alignment is the horizontal alignment of text within an element, which can be set by using 'text-align' property in CSS.
+        ```css
+        h1 {
+            text-align: center;
+        }
+        ```
+    - Common values for 'text-align' include 'left', 'right', 'center', and 'justify'.
+    - It is often used to create a specific visual effect or to improve readability.
+7. 'line-height'
+    - Line height is the height of a line of text, which can be set by using 'line-height' property in CSS.
+        ```css
+        h1 {
+            line-height: 1.5;
+        }
+        ```
+    - It is often used to improve readability and spacing between lines.
+    - You can use unitless values, pixels, or percentages for line height.
+*/
+
+/* Example of using text styling properties */
+p {
+    font-family: 'Arial', sans-serif;        /* Sets the font family */
+    font-size: 16px;                         /* Sets the font size */
+    color: #333;                             /* Sets the text color */
+    background-color: #f0f0f0;              /* Sets the background color */
+    text-align: justify;                     /* Justifies the text alignment */
+    line-height: 1.6;                        /* Sets line height for better readability */
+    text-decoration: underline;              /* Underlines the text */
+}
+
+/*Display and visibility*/
+/*
+Display is Key to Layout
+- Every element is a box.
+- Display affects the layout of the neighboring elements.
+Common display values:
+- 'inline': elements sit next to elements.
+    + Takes up "just enough" width and height.
+- 'block': forces line breaks.
+    + default: takes up all the horizontal width and "just enough" height.
+    + Can rule the width and height.
+- 'inline-block': combines inline and block.
+    + Takes up "just enough" width and height.
+    + Can rule the width and height.
+- 'none': removed from page.
+Complementary properties:
+- 'float'
+    + Repositions elements to the left or right.
+    + Elements are aware of each other and won't overlap.
+    + Values: 'left', 'right', 'none'.
+- 'clear'
+    + Prevents elements from overlapping.
+    + Values: 'left', 'right', 'both', 'none'.
+Overflow
+- visible: Can cause text to show up "on top" of other text.
+- hidden: Hides anything that goes beyond bounding box.
+    -> This can cause problems since if the user increases font size, they may not be able to see content.
+- scroll: Give horizontal and vertical scrollbars.
+- auto: Adds scrollbars as needed.
+Other display values:
+New display properties are available, but not always supported:
+- Table
+- Grid
+- Flexbox
+
+Visibility
+- Specifies whether or not elements are visible.
+- Options include:
+    + visible
+    + hidden
+    + collapse (only for table elements)
+- Hidden elements still take up space in the layout.
+- Visibility can be toggled using JavaScript or CSS transitions.
+*/
+
+/* Example of using display and visibility properties */
+div {
+    display: block;                          /* Sets the display to block */
+    width: 100%;                             /* Sets the width to 100% of the parent element */
+    height: auto;                            /* Sets the height to auto */
+    visibility: visible;                     /* Makes the element visible */
+}
+span {
+    display: inline;                         /* Sets the display to inline */
+    color: red;                              /* Sets the text color to red */
+    visibility: hidden;                      /* Hides the element but keeps its space */
+}
+
+/*
+Grid
+- We can use grid to place your content in columns.
+- In order to use grid, we need to define a parents element and give it children elements.
+- Define the parent element as a grid container:
+    + Step 1: Set display to grid.
+        `display: grid;`
+    + Step 2: Set grid-template-columns to number and size of columns.
+        `grid-template-columns: 100px 200px;`
+    + Step 3: Set justify-content.
+        `justify-content: center;`
+    
+- For example:
+*/
+
+/*One columns grid*/
+div {
+    display: grid;
+    grid-template-columns: 500px;
+}
+
+*/*Two columns grid*/
+div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+/*Three columns grid*/
+div {
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
+}
+
+/*
+Justify-content
+- Justify-content is used to align the grid items within the grid container.
+- We may want to adjust the default layout of the children with justify-content.
+- Common values for justify-content include:
+    + 'start'
+    + 'end'
+    + 'center'
+    + 'space-between'
+    + 'space-around'
+    + 'space-evenly'
+    + 'stretch'
+- For example:
+*/
+
+div {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    justify-content: center; /* Centers the grid items horizontally */
+}
+
+/*
+Modifying the child elements
+- We can modify the child elements of the grid container using grid properties.
+- Best practice is to not hardcode the width of the children elements.
+- Use a fluid measurement to make the most of the parent structure.
+
+Positioning the children elements
+- The children elements will automatically fall into the next available space.
+- We can move the elements using:
+    + 'grid-column-start'
+    + 'grid-column-end'
+    + 'grid-row-start'
+    + 'grid-row-end'
+*/
+
+/*
+Flex / Flexbox
+- We can use flex if we want to let the browser resize the elements based on the screen size.
+- In order to use flex, we need to define a parents element and give it children elements.
+- How to set up a flex container (Parent Element):
+    + Step 1: Set display to flex.
+        `display: flex;`
+    + Step 2: Set `flex-wrap` to `wrap` or `nowrap`.
+        `flex-wrap: wrap;`
+    + Step 3: Set `flex-direction` to `row` or `column`.
+        `flex-direction: row;`
+    + Step 4: Set `justify-content` to align the items.
+        `justify-content: center;`
+- For example:
+*/
+
+div{
+    display: flex;
+    flex-wrap: wrap;                     /* Allows items to wrap onto multiple lines */
+    flex-direction: row;                 /* Sets the direction of the flex items */
+    justify-content: center;             /* Centers the flex items horizontally */
+}
+
+/*
+Justify-content
+- You may want to adjust the default layout of the children with justify-content.
+- Common values for justify-content include:
+    + `flex-start`
+    + `flex-end`
+    + `center`
+    + `space-between`
+    + `space-around`
+    + `space-evenly`
+- We use justify-content when the direction is row.
+- If we are using direction column, we will want to use `align-items` instead.
+- Common values for `align-items` include:
+    + `start`
+    + `end`
+    + `center`
+    + `stretch`
+    + 'space-between'
+    + 'space-around'
+    + 'space-evenly'
+- For example:
+*/
+
+/* Example of using flex with row direction */
+div {
+    display: flex;
+    flex-direction: row;                 /* Sets the direction of the flex items */
+    justify-content: center;             /* Centers the flex items horizontally */
+}
+
+/* Example of using flex with column direction */
+div {
+    display: flex;
+    flex-direction: column;              /* Sets the direction of the flex items */
+    align-items: center;                 /* Centers the flex items vertically */
+}
+
+/*
+STYLING LINKS AND LISTS
+
+Links
+- Links can take on all of the usual styles as well as text-decoration.
+- Many designers try to make their links look like buttons.
+- Be semantic, if you want a button use the `<button>` element instead.
+
+Link states
+? Some links are blue, some are purple, etc. Why?
+- Links have different states:
+    + a:link - The default state of a link. (A normal, unvisited link)
+    + a:visited - A link that has been visited.
+    + a:hover - A link that is being hovered over by the mouse (or touchscreens...?).
+    + a:focus - A link that has been focused on by the user (e.g., using the keyboard).
+    + a:active - A link that is currently being clicked on by the user.
+- a:hover must come after a:link and a:visited.
+- a:active must come after a:hover.
+
+Styling links
+*/
+a:link {
+    color: blue;                          /* Sets the color of unvisited links */
+    text-decoration: none;                /* Removes the underline from links */
+}
+a:visited {
+    color: purple;                        /* Sets the color of visited links */
+    text-decoration: none;                /* Removes the underline from visited links */
+}
+a:hover {
+    color: red;                           /* Sets the color of links when hovered */
+    text-decoration: underline;           /* Underlines links when hovered */
+}
+a:focus {
+    outline: 2px solid orange;            /* Adds an outline to focused links */
+}
+a:active {
+    color: green;                         /* Sets the color of links when clicked */
+    text-decoration: underline;           /* Underlines links when clicked */
+}
+
+/*
+Styling lists
+- Number of properties beyond font, margin, etc.
+    + `list-style-type`
+    + `list-style-image`
+    + `list-style-position`
+    + `list-style`
+
+1. `list-style-type`
+    - Ordered lists: `lower-roman`, `upper-roman`, `lower-alpha`, `upper-alpha`, `decimal`, etc.
+    - Unordered lists: `disc`, `circle`, `square`, etc.
+2. `list-style-image`
+    - Use an image as the bullet point for list items.
+*/
+
+ul {
+    list-style-type: square;              /* Sets the bullet style for unordered lists */
+}
+ol {
+    list-style-type: decimal;             /* Sets the numbering style for ordered lists */
+}
+
+/*
+Styling Specific Objects
+- Sometimes we don't want to style all links or lists the same way.
+- CSS gives us the ability to target specific objects using classes and IDs.
+
+- CSS selectors follow the DOM.
+- Descendant selectors (nav a)
+    -> Style all of the anchor links inside a nav tag.
+- Child selectors (nav > a)
+    -> more constraining: The anchor elements MUST be a child of the nav, not intermediate tags, e.g. paragraph.
+- Adjacent sibling (hl + ol)
+    -> Style the first ordered list that comes after a heading.
+
+-- ID Selectors --
+- #id selectors:
+    + Used to identify a single element in the DOM.
+    + Was used extensively for <div id = "header">, <div id = "footer">, etc.
+    + There is a small movement to move the use of ID OUT of CSS.
+
+-- Class Selectors --
+- .class selector:
+    + Used to identify an element in the DOM that is part of a special class of items.
+    + Think of thumbnail images, all of the link that are in navigation, social media images, etc...
+
+-- Classes vs. IDs --
+- Syntax is '.' and '#'.
+- IDs are unique, classes can be used multiple times.
+- Think of images and navigation bars
+    + Format numerous (but not all) images the same way.
+    + Visually signify the current page.
+
+-- Narrowing the Scope --
+- As we get more advanced pages, we will want to narrow the scope of the action.
+    + p.main -> paragraphs using main class.
+    + header img.special -> paragraphs inside header that use special class.
+
+-- Expanding the Scope --
+- We can combine elements with a comma
+    + p, hl, #main, .special{...rules to apply to all of them...}
+- What happens  when there are multiple rules for the same selector?
+    + The last rule will take precedence.
+    + Unless... a rule has `!important` at the end.
+
+=> We can use style sheets from others to style our code by adding class.
+=> Or, we can override style sheets from others just by rewriting the class, or making your own version and linking it last.
+*/
+
+/* Example of using class and ID selectors */
+#header {
+    background-color: #333;                /* Sets the background color of the header */
+    color: white;                          /* Sets the text color of the header */
+    padding: 10px;                         /* Adds padding to the header */
+}
+.nav-link {
+    color: #007bff;                        /* Sets the color of navigation links */
+    text-decoration: none;                 /* Removes underline from navigation links */
+}
+.nav-link:hover {
+    color: #0056b3;                        /* Changes color of navigation links on hover */
+    text-decoration: underline;            /* Underlines navigation links on hover */
+}
+
+/* Example of using descendant and child selectors */
+nav a {
+    color: #fff;                           /* Sets the color of links inside nav */
+}
+nav > a {
+    color: #fff;                           /* Sets the color of direct child links inside nav */
+}
+
+/* Example of using adjacent sibling selector */
+h1 + ol {
+    margin-top: 20px;                     /* Adds margin to the first ordered list after a heading */
+    color: #333;                           /* Sets the color of the ordered list */
+}
+
+/* Example of using class and ID selectors with specificity */
+p.main {
+    font-size: 18px;                       /* Sets the font size for paragraphs with class 'main' */
+    color: #555;                           /* Sets the text color for paragraphs with class 'main' */
+}
+
+/* Example of using multiple selectors */
+p, h1, #main, .special {
+    margin: 10px;                          /* Adds margin to paragraphs, headings, main ID, and special class */
+    padding: 5px;                          /* Adds padding to paragraphs, headings, main ID, and special class */
+    border: 1px solid #ccc;                /* Adds a border to paragraphs, headings, main ID, and special class */
+}
+
+/*
+Attribute Selectors
+
+- Universal selector
+    + * applies styling to every element on the page.
+- Attribute selectors
+    + a[href='info.html']
+- Pseudo Classes
+- Pseudo Elements
+
+- We may want to search the DOM for certain elements that have an attribute we are looking for.
+    + All the image that use gif files...
+    + All the images that have empty alt text...
+    + All the links that go to government sites...
+-We use operators to search for attributes or attributes values.
+    + ^ : match the beginning exactly
+    + $ : match the end exactly
+    + * : wildcard match
+*/
+
+/* Example of using Universal selector*/
+* {
+    margin: 0;                             /* Resets margin for all elements */
+    padding: 0;                            /* Resets padding for all elements */
+    box-sizing: border-box;                /* Sets box-sizing to border-box for all elements */
+}
+
+/* Example of using Attribute selectors */
+img[src$=".gif"] {
+    border: 2px solid red;                 /* Adds a red border to all images with .gif extension */
+}
+img[alt=""] {
+    opacity: 0.5;                          /* Makes images with empty alt text semi-transparent */
+}
+a[href^="https://www.gov."] {
+    color: green;                          /* Sets the color of links that start with https://www.gov. */
+    text-decoration: underline;            /* Underlines links that start with https://www.gov. */
+}
+a[href*="example.com"] {
+    color: blue;                           /* Sets the color of links that contain example.com */
+    font-weight: bold;                     /* Makes links that contain example.com bold */
+}
+
+/*
+Browser Default Styles
+- Browsers have default styles for elements.
+- These styles can vary between browsers.
+- We can use a CSS reset or normalize.css to standardize styles across browsers.
+- A CSS reset removes all default styles, while normalize.css preserves useful defaults.
+
+Browser Capabilities
+- Different browsers may support different CSS features also HTML features.
+- We can use feature detection libraries like Modernizr to check for support.
+
+Browser prefix
+- If a property isn't  supported, we can often use browser-prefixes to enable it.
+- Common prefixes include:
+    + -webkit- for Chrome, Safari, Android, and newer versions of Opera
+    + -moz- for Firefox
+    + -ms- for Internet Explorer and Edge
+    + -o- for older versions of Opera
+- Sites such as https://caniuse.com/ can help us determine if we need to use prefixes.
+*/
+
+/* Example of using browser prefixes */
+section{
+    width: 100%;
+
+    -webkit-column-count: 3; /* For Chrome, Safari, Android, and newer versions of Opera */
+    -moz-column-count: 3;    /* For Firefox */
+    -o-column-count: 3;      /* For older versions of Opera */
+    column-count: 3;         /* Standard property for all browsers */
+
+    -webkit-column-gap: 15px;
+    -moz-column-gap: 15px;
+    -o-column-gap: 15px;
+    column-gap: 15px;
+
+    border-radius: 25px;
+    -webkit-border-radius: 25px; /* For Chrome, Safari, Android, and newer versions of Opera */
+    -moz-border-radius: 25px;    /* For Firefox */
+    -o-border-radius: 25px;      /* For older versions of Opera */
+}
+
+/*
+- There are ways to automate the addition of prefixes:
+    + Editor add-ons (We have most of the control)
+    + Use outside programs to dynamically add appropriate prefix based on browser.
+- But don't over use prefixes.
+*/
+
+/*
+Background Images and Opacity
+
+- Background property can take more than just color.
+- We can use background images for our elements instead of images, which is a great way to style our site without adding the bilk of more tags (and alt text too).
+- While using `background-image`, we will meet some challenges: folder structure and variations in image size.
+
+-- Folder structure --
+- We usually be recommended to put .html files in a folder, then .css files in a subfolder, and images in another subfolder:
+    +Web project
+        + index.html
+        + css
+            + styles.css
+            + default.css
+        + images
+            + logo.png
+            + background.jpg
+            + ...
+- When we use `background-image` in .css, with the folder structure above, we will hardly find the image we want to use.
+- We can use relative paths to reach to the required image.
+*/
+body{
+    background-image: url('../images/background.png');
+}
+
+/*
+-- Variations in image size --
+- It is rarely the case that the image we use is perfectly fit the size of an element.
+- We can use some background properties to get our site looking the way we want.
+    + `background-repeat`
+    + `background-size`
+    + `background-position`
+*/
+body{
+    background-color: #f0f0f0;
+    height: 500px;
+    background-position: center;
+    background-size: cover;
+}
+/*
+-- Opacity --
+- Opacity is the transparency of an element.
+- In this case, if our image make the text hard to read, we can alter the opacity of the image.
+- For further information, visit this site: https://css-tricks.com/almanac/properties/o/opacity/
+*/
+
+/*
+Designing for Accessibility
+- Mostly, the content of our page should be in the HTML.
+- It is tempting to add content via colors, images, etc.
+- And it is important to follow the POUR guidelines:
+    + Perceivable
+    + Operable
+    + Understandable
+    + Robust
+
+- Perceivable:
+    + Provide text alternatives for non-text content.
+    + Provide captions and transcripts for audio and video.
+    + Use correct semantic markup so content can be presented in different ways.
+    + Make it easier for users to see content by using good color contrast.
+- Operable:
+    + All functionality available from the keyboard.
+    + Users have control over timing and limits.
+    + Do not cause seizures (Don't flash content).
+    + Provide ways to help users navigate, find content, and determine where they are.
+- Understandable:
+    + Economical and plain use of language.
+    + Text supplemented with illustrations, videos, and other formats where appropriate (i.e., use good Universal Design)
+    + Navigation, information structure are discernable and consistent.
+    + Make pages operate in predictable way.
+    + Help users avoid and correct mistakes.
+- Robust:
+    + Is your site functional across various technologies?
+    + Syntax errors that don't affect visual presentation may hamper assistive technology and accessibility tools.
+    + Adhering to W3C standards ensures future compatibility.
+    + Alway validate the code.
+
+/*
+Border, Margin and Padding
+
+-- BORDER --
+- CSS border properties allow us to specify the style, width, and color of an element's border.
+- The `border-style` propertiy specifies how the border will be displayed:
+    + `dotted`  : dotted border
+    + `dashed`  : dashed border
+    + `solid`   : solid border
+    + `double`  : double border
+    + `groove`  : 3D grooved border, effect depends on `border-color` value.
+    + `ridge`   : 3D ridged border, effect depends on `border-color` value.
+    + `inset`   : 3D inset border, effect depends on `border-color` value.
+    + `outset`  : 3D outset border, effect depends on `border-color` value.
+    + `none`    : no border
+    + `hidden`  : hidden border
+- The `border-style` can have from one to four values (defined for top, right, bottom and left border).
+*/
+
+p.dotted {
+    border-style: dotted;
+}
+p.dashed {
+    border-style: dashed;
+}
+p.solid {
+    border-style: solid;
+}
+p.double {
+    border-style: double;
+}
+p.groove {
+    border-style: groove;
+}
+p.ridge {
+    border-style: ridge;
+}
+p.inset {
+    border-style: inset;
+}
+p.outset {
+    border-style: outset;
+}
+p.none {
+    border-style: none;
+}
+p.hidden {
+    border-style: hidden;
+}
+p.mix {
+    border-style: dotted dashed solid double;
+}
+
+/*
+- CSS `border-width` help specify the width of the four borders.
+- It can be defined by a specific size (use px, pt, cm, em, etc.) or using three pre-defined value: thin, medium or thick:
+*/
+
+p.one {
+  border-style: solid;
+  border-width: 5px;
+}
+
+p.two {
+  border-style: solid;
+  border-width: medium;
+}
+
+p.three {
+  border-style: dotted;
+  border-width: 2px;
+}
+
+p.four {
+  border-style: dotted;
+  border-width: thick;
+}
+
+/*
+- CSS `border-color` is used to set the color of the four borders.
+- The color can be set by:
+    + name
+    + HEX
+    + RGB
+    + HSL
+    + transparent
+- If `border-color is not set, it inherits the color of the element.
+*/
+
+p.one {
+  border-style: solid;
+  border-color: red;
+}
+
+p.two {
+  border-style: solid;
+  border-color: #F103C3;
+}
+
+p.three {
+  border-style: dotted;
+  border-color: rgb(136, 245, 128);
+}
+
+/*
+- If you want to edit each border individual side, CSS can help you with:
+    + `border-top-style`
+    + `border-right-style`
+    + `border-bottom-style`
+    + `border-left-style`
+- Or just easily edit with `border-style`.
+- The same thing can also be done with `border-width` and `border-color`.
+*/
+
+p {
+  border-top-style: dotted;
+  border-right-style: solid;
+  border-bottom-style: dotted;
+  border-left-style: solid;
+}
+
+/* Four values */
+p {
+  border-style: dotted solid double dashed;
+}
+
+/* Three values */
+p {
+  border-style: dotted solid double;
+}
+
+/* Two values */
+p {
+  border-style: dotted solid;
+}
+
+/* One value */
+p {
+  border-style: dotted;
+}
+
+/*
+- When dealing with border, there are a lot of properties we need to focus on.
+- We can shorten the code by specify all the individual border properties in one property.
+- The `border` property is a shorthand property for the following individual border properties:
+    + `border-width`
+    + `border-style` (required)
+    + `border-color`
+*/
+
+p {
+  border: 5px solid red;
+}
+
+/*
+- Or we can specify all the individual border properties for just one side:
+*/
+
+/*Left side*/
+p {
+  border-left: 6px solid red;
+}
+
+/*Bottom side*/
+p {
+  border-bottom: 6px solid red;
+}
+
+/*
+- Final property we need to know from the border is `border-radius`.
+- `border-radius` is used to add rounded borders to an element.
+- For more border properties, we can search on the Internet.
+*/
+
+/*
+--MARGIN--
+- The CSS margin properties are used to create space around elements, outside of any defined borders.
+- Margins define the distance between an element's border and the surrounding elements.
+- With CSS, you have full control over the margins. CSS has properties for setting the margin for each individual side of an element (top, right, bottom, and left), and a shorthand property for setting all the margin properties in one declaration.
+
+1. Margin - Individual Sides
+- CSS has properties for specifying the margin for each side of an element:
+    + `margin-top` - sets the top margin of an element
+    + `margin-right` - sets the right margin of an element
+    + `margin-bottom` - sets the bottom margin of an element
+    + `margin-left` - sets the left margin of an element
+
+- All the margin properties can have the following values:
+    + `auto` - the browser calculates the margin
+    + `length` - specifies a margin in px, pt, cm, etc.
+    + `%` - specifies a margin in % of the width of the containing element
+    + `inherit` - specifies that the margin should be inherited from the parent element
+- Tip: Negative values are also allowed.
+*/
+
+p {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+/*
+2.Margin - Shorthand Property
+- To shorten the code, it is possible to specify all the margin properties in one declaration.
+- The `margin` property is a shorthand property for the following individual margin properties:
+    + `margin-top`
+    + `margin-right`
+    + `margin-bottom`
+    + `margin-left`
+- Here is how it works:
+    + If the margin property has four values:
+        `margin: 25px 50px 75px 100px;`
+    => Top margin is 25px
+    => Right margin is 50px
+    => Bottom margin is 75px
+    => Left margin is 100px
+
+    + If the margin property has three values:
+        `margin: 25px 50px 75px;`
+    => Top margin is 25px
+    => Right and left margins are 50px
+    => Bottom margin is 75px
+
+    + If the margin property has two values:
+        `margin: 25px 50px;`
+    => Top and bottom margins are 25px
+    => Right and left margins are 50px
+
+    + If the margin property has one value:
+        `margin: 25px;`
+    => All four margins are 25px
+*/
+
+/* Four values */
+p {
+  margin: 25px 50px 75px 100px;
+}
+
+/* Three values */
+p {
+  margin: 25px 50px 75px;
+}
+
+/* Two values */
+p {
+  margin: 25px 50px;
+}
+
+/*One value*/
+p {
+  margin: 25px;
+}
+
+/*
+3. The `auto` value
+- You can set the `margin` property to `auto` to horizontally center the element within its container.
+` The element will then take up the specified width, and the remaining space will be split equally between the left and right margins.
+*/
+
+div {
+  width: 300px;
+  margin: auto;
+  border: 1px solid red;
+}
+
+/*
+4. The `inherit` value
+- The inherit Value
+- You can set the margin property to inherit to let the margin be inherited from the parent element.
+- This example lets the left margin of the <p class="ex1"> element be inherited from the parent element (<div>):
+*/
+
+div {
+  border: 1px solid red;
+  margin-left: 100px;
+}
+
+p.ex1 {
+  margin-left: inherit;
+}
+
+/*
+--PADDING--
+1. CSS Padding
+- The CSS padding properties are used to generate space around an element's content, inside of any defined borders.
+- With CSS, you have full control over the padding. There are properties for setting the padding for each side of an element (top, right, bottom, and left), and a shorthand property for setting all the padding properties in one declaration.
+
+2. Padding - Individual Sides
+- CSS has properties for specifying the padding for each side of an element:
+    + `padding-top` - sets the top padding of an element
+    + `padding-right` - sets the right padding of an element
+    + `padding-bottom` - sets the bottom padding of an element
+    + `padding-left` - sets the left padding of an element
+- All the padding properties can have the following values:
+    + `length` - specifies a padding in px, pt, cm, etc.
+    + `%` - specifies a padding in % of the width of the containing element
+    + `inherit` - specifies that the padding should be inherited from the parent element
+
+3. Padding - Shorthand Property
+- To shorten the code, it is possible to specify all the padding properties in one declaration.
+- The padding property is a shorthand property for the following individual padding properties:
+    + `padding-top`
+    + `padding-right`
+    + `padding-bottom`
+    + `padding-left`
+- Here is how it works:
+    + If the padding property has four values:
+        padding: 25px 50px 75px 100px;
+    => Top padding is 25px
+    => Right padding is 50px
+    => Bottom padding is 75px
+    => Left padding is 100px
+
+    + If the padding property has three values:
+        padding: 25px 50px 75px;
+    => Top padding is 25px
+    => Right and left paddings are 50px
+    => Bottom padding is 75px
+
+    + If the padding property has two values:
+        padding: 25px 50px;
+    => Top and bottom paddings are 25px
+    => Right and left paddings are 50px
+
+    + If the padding property has one value:
+        padding: 25px;
+    => All four paddings are 25px
+*/
+
+/* Four values */
+p {
+  padding: 25px 50px 75px 100px;
+}
+
+/* Three values */
+p {
+  padding: 25px 50px 75px;
+}
+
+/* Two values */
+p {
+  padding: 25px 50px;
+}
+
+/*One value*/
+p {
+  padding: 25px;
+}
+
+/*
+4. Padding and Element Width
+- The CSS `width` property specifies the width of the element's content area. The content area is the portion inside the padding, border, and margin of an element (the box model).
+- So, if an element has a specified width, the padding added to that element will be added to the total width of the element. This is often an undesirable result.
+*/
+
+div {
+  width: 300px;
+  padding: 25px;
+}
+/*Here, the <div> element is given a width of 300px. However, the actual width of the <div> element will be 350px (300px + 25px of left padding + 25px of right padding)*/
+
+/*
+5. Padding and box-sizing
+- The `box-sizing property` defines how the width and height of an element are calculated: should they include padding and borders, or not.
+- The `box-sizing property` can have the following values:
+    + `content-box` - This is default. The width and height properties includes only the content (border and padding are not included)
+    + `border-box` - The width and height properties includes content, padding and border
+- So, to keep the width at 300px, no matter the amount of padding, you can use the `box-sizing: border-box;`. This causes the element to maintain its actual width; if you increase the padding, the available content space will decrease.
+*/
+
+div {
+  width: 300px;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+/*
+PSEUDO CLASSES AND ELEMENTS

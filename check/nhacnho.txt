@@ -1,0 +1,294 @@
+Ngày 1: Kiến thức nhập môn và xuất dữ liệu
+/*
+    /*Nhớ kĩ hai dòng này*/
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    /*Mỗi bài bắt buộc phải có CHỈ 1 dòng int main()*/
+    int main() {<code>}
+
+    /*Không quan trọng nhưng nên nhớ*/
+    return 0;
+
+    /*Lưu ý quan trọng*/
+    - Mỗi khối lệnh phải được để giữa cặp dấu '{...}'
+    - Kết thúc câu lệnh PHẢI có dấu ';'
+
+    - Lệnh "cout" dùng để xuất dữ liệu, đi kèm với dấu "<<" (cout << "...";)
+    - Khi cout nhiều dữ liệu, giữa mối dữ liệu phải có dấu "<<" (cout << "Hung chim queo"<< endl << "nhung nau an ngol";)
+    - Muốn in ra một câu/đoạn thì phải để giữa hai dấu nháy kép (cout << "hung cu be";)
+    - Muốn in CHỈ ký tự thì dùng dấu nháy đơn (cout << 'a';)
+    - Muốn in một số bé hơn 10^8 thì không cần dùng dấu nháy kép (cout << 10000000;)
+    - Xuống dòng có 3 cách:
+        + Dùng endl (cout << "hung cu be" << endl << "thuan lun";)
+        + Dùng "\n" (cout << "hung cu be" << "\n" << "thuan lun";)
+        + Vẫn dùng "\n" nhưng nối trực tiếp vào câu (cout << "hung cu be\nthuan lun";), chỉ dùng giữa hai dấu nháy kép.
+*/
+    --------------------
+Ngày 2: Các kiểu dữ liệu cơ bản và nhập dữ liệu
+/*
+    - Các kiểu dữ liệu cơ bản:
+        + short: 2 byte => -32768 -> 32767 (Khoảng 10^4)
+        + int: 4 byte => -2147483648 -> 2147483647 (Khoảng 10^9)
+        + long: là int
+        + long long: 8 byte => Khoảng 10^18
+            ==> Kiểu số nguyên
+        + float: 4 byte => 6 vị trí thập phân
+        + double: 8 byte => 15 vị trí thập phân
+        + long double: 10 byte => 19 vị trí thập phân
+            ==> Kiểu số thực
+        * Lưu ý: Khi thêm unsigned vào (unsigned int) thì không còn giá trị âm, giá trị dương tối đa tăng gấp đôi
+        + char: 1 byte => 0 -> 255
+            ==> Ký tự (a, b, c, x, y, z, !, @, ....)
+        + bool: 1 bit => 0 hoặc 1 (đúng hoặc sai)
+            ==> Logic
+    - Khai báo một biến: <kiểu dữ liệu> <tên biến> (int hung;)
+    - Tên biến không được chứa ký tự đặc biệt và dấu cách.
+    - Khi khai báo nhiều biến cùng kiểu dữ liệu phải dùng dấu ',' (char hung, manh, kien, ...;)
+    - Có thể cài đặt trước giá trị của 1 biến, giá trị đặt trước phải trong phạm vi lưu trữ của kiểu dữ liệu. (bool hung = 1;)
+    - Nhập vào: cin >> <tên biến>; ví dụ: cin >> n;
+    - khi nhập lệnh cin, mình gắn cho biến được cin một giá trị theo đề bài.
+    - trước khi sử dụng 1 biến thì phải khai báo biến đó trước.
+    - khi cin nhiều biến thì giữa mỗi biến cần có dấu ">>" (cin >> a >> b >> ...;)
+*/
+    --------------------
+Ngày 3: Phép gán, phép toán số học và phép so sánh
+/*
+    - Phép gán sử dụng dấu '=', được dùng để gán cho một biến bất kỳ một giá trị tương ứng thỏa mãn kiểu dữ liệu của biến đó.
+    - Các phép toán có thể sử dụng:
+        + Phép cộng : (+) VD: a + b
+        + Phép trừ : (-) VD: a - b
+        + Phép nhân : (*) VD: a * b
+        + Phép chia lấy phần nguyên : (/) VD: a / b
+        + Phép chia lấy phần dư : (%) VD: a % b
+        + Phép lấy căn bậc 2: (sqrt(...)) VD: (sqrt(a))
+    - Thứ tự thực hiện: căn -> nhân chia -> cộng trừ
+    - Trong trường hợp có dấu ngoặc, dấu ngoặc hợp lệ cho một biểu thức là dấu '(' và ')' VD: a * (b + c)
+    - Có thể lồng nhiều dấu ngoặc trong một biểu thức. VD a * (b + (a - c))
+    - Biểu thức: tập hợp các phép toán có nghĩa VD: a + b * (c - d)
+    - Các biểu thức có thể được coi như một biến.
+    - Biểu thức vẫn hợp lệ đối với các kiểu dữ liệu kiểu số thực và ký tự. VD: 2.33 + a hoặc 'a' + 8.
+    - Kiểu dữ liệu của một biểu thức theo thứ tự ưu tiên:
+        ký tự = kiểu số thực > số nguyên
+    - Lưu ý: kiểu dữ liệu ký tự không thể thực hiến một phép toán với một số thực
+    - VD:
+        + 2.33(số thực) + a(số nguyên) => kiểu số thực
+        + 'a'(ký tự) + a(số nguyên) => ký tự
+        + 'a'(ký tự) + 2.33(số thực) => không tồn tại
+    - Các phép so sánh là các biểu thức trả về kết quả là Đúng(1/true) / Sai(0/false).
+    - Các phép so sánh có thể sử dụng:
+        + Phép lớn hơn : (>) VD: a > b
+        + Phép bé hơn : (<) VD: a < b
+        + Phép bằng : (==) VD: a == b
+        + Phép khác : (!=) VD: a != b
+    - Phép so sánh được chia làm 2 vế; cả hai vế đều có thể được sử dụng như một biến, một hằng số hoặc một biểu thức.
+    - Các ký tự và số thực vẫn có thể được sử dụng trong phép so sánh
+    - VD:
+        + 'a' > a
+        + 9.6 != a / b
+*/
+    --------------------
+Ngày 4: Comment và thao tác nhập xuất bằng file
+/*
+    - Comment thường được dùng để ghi chú về một đoạn code, một dòng code, giúp người đọc dễ hiểu và dễ hình dung về tác dụng của đoạn code, dòng code đó.
+    - Cách sử dụng: Dùng dấu "//" hoặc đặt giữa cặp dấu "/*" và "*/".
+    - Khi dùng dấu "//", toàn bộ phần phía sau trong dòng đó sẽ được chuyển thành comment và sẽ không được duyệt khi run code.
+    - VD: cout << a + b; //Phép cộng a + b ("Phép cộng a + b" là comment).
+    - Khi dùng cặp dấu "/*" và "*/", mọi nội dung ở giữa hai dấu trên sẽ được chuyển thành comment và không được duyệt khi run code.
+    - VD: cout << a + b; /* Phép cộng */ return 0; ("Phép cộng" là comment).
+    - Cấu trúc thao tác file bao gồm 2 dòng lệnh:
+        + File nhập vào: freopen("<tên file>.inp" (hoặc "<tên file>.txt>"),"r",stdin); VD: freopen("input.inp","r",stdin);
+        + File xuất ra: freopen("<tên file>.out" (hoặc "<tên file>.txt"),"w",stdout); VD: freopen("output.out","w",stdout);
+    - Khi sử dụng hai dòng lệnh trên, các đầu vào sẽ được lấy từ các file tương ứng TRONG CÙNG THƯ MỤC.
+    - Điều bắt buộc phải nhớ (Dùng trong các kỳ thi HSG).
+*/
+    --------------------
+Ngày 5: Rẽ nhánh
+/*
+    - Rẽ nhánh có 2 dạng:
+        + Dạng đầy đủ:
+            if (<condition>) {<code_1>} else {<code_2>}
+        + Dạng khuyết:
+            if (<condition>) {<code_2>}
+    - Nếu điều kiện trong condition được thỏa mãn thì sẽ chạy các lệnh trong khối code_1, nếu không thỏa mãn sẽ không chạy (trong trường hợp dạng khuyết) hoặc sẽ chạy khối code_2 (trong trường hợp dạng đầy đủ).
+    - Có thể lồng nhiều lệnh rẽ nhánh vào nhau:
+        ìf (<condition>){if (<condition) {<code>} <code>}
+    - Cũng có thể đặt if sau else:
+        if (<condi_1>) {<code>} else if (<condi_2) {<code>}
+    - Điều kiện trong khối condition phải là một biểu thức logic.
+    - Có thể có nhiều hơn 1 điều kiện trong khối condition.
+    - Nối các điều kiện với nhau bằng phép "and" (&&) hoặc phép "or" (||).
+        VD: a + b == 0 && a - b > 0
+            a + b == 0 || a - b == 0
+    - Phép "and" (<condi_1> && <condi_2>) : Đúng <=> condi_1 đúng và condi_2 đúng.
+    - Phép "or" (<condi_1> || <condi_2>): Đúng <=> condi_1 đúng hoặc condi_2 đúng.
+
+    - Một dạng rẽ nhánh ít dùng hơn là switch-case:
+        switch(biến điều kiện)
+        {
+            case <kết quả 1>:
+                code;
+            case <kết quả 2>:
+                code;
+            ...
+            case <kết quả n>:
+                code;
+            default:
+                code;
+        }
+    - Điều kiện trong switch case được xét lần lượt. Nếu xuất hiện lệnh break trong khối code được chạy sẽ thoát khỏi khối switch-case.
+    - Biến điều kiện phải trả về kiểu số (int, char, short, long, ...)
+    - Các case sẽ phải là số hoặc là ký tự (trong trường hợp biến điều kiện là kiểu char).
+*/
+    --------------------
+Ngày 6: Vòng lặp
+/*
+    - Lặp với số lần biết trước:
+        + Cấu trúc: for(<khai báo biến>; <điều kiện>; <hướng biến đổi>) {<code>}
+            for (int i = 0; i < n; i ++) {<code>}
+                * int i = 0: khai báo biến (i đóng vai trò là biến đếm số lần lặp)
+                * i < n: điều kiện (i < n == true thì vòng lặp tiếp tục thực hiện)
+                * i ++: hướng tăng (i tăng thêm 1 đơn vị sau mỗi lần lặp)
+            for (int i = n - 1; i >= 0; i -= 2) {<code>}
+                * int i = n - 1: i là biến đếm có giá trị khởi tạo bằng n - 1
+                * i >= 0: chừng nào i không âm thì vòng lặp tiếp tục thực hiện
+                * i -= 2: i giảm 2 đơn vị sau mỗi vòng lặp
+        + Mọi thành phần trong cấu trúc for đều là tương đối.
+            for (;;)
+        + Hướng biến đổi:
+            * Tăng: dùng dấu "++" (tăng 1 đơn vị) hoặc "+= <một số nguyên nào đó>"
+            * Giảm: dùng dấu "--" (giảm 1 đơn vị) hoặc "-= <một số nguyên nào đó>"
+        + Điều kiện phải là 1 biểu thức logic.
+    - Lặp với số lần chưa biết trước:
+        + Cấu trúc: while (<điều kiện>) {<code>}
+            while (a > b) {<code>}
+                * a > b: chừng nào a còn lớn hơn b thì vòng lặp tiếp tục thực hiện
+            while (i != 0) {<code>}
+        + Mọi thành phần trong cấu trúc while đều là tương đối.
+            while(true)
+        + Lặp ít nhất 1 lần: do {<code>} while (<condition>);
+    - Muốn phá lặp có thể dùng 2 cách:
+        + Biến đổi các biến tham gia và làm cho điều kiện sai.
+        + Dùng lệnh "break;"
+*/
+    --------------------
+Ngày 7: Ôn tập: Rẽ nhánh & Vòng lặp
+/*
+    Rẽ nhánh:
+        Bài 1: Viết chương trình nhập vào hai số a và b và kiểm tra xem a có chia hết cho b không.
+            - Đầu vào: Hai số a, b cách nhau một dấu cách.
+            - Đầu ra:
+                + In ra 'YES' nếu a chia hết cho b
+                + In ra 'NO' nếu a không chia hết cho b.
+
+        Bài 2: Viết chương trình nhập vào ba số a, b, c. Kiểm tra xem ba số đó có phải là cạnh của một tam giác không.
+            - Đầu vào: Ba số a, b, c; mỗi số cách nhau một dấu cách.
+            - Đầu ra:
+                + In ra 'YES' nếu a, b, c là 3 cạnh của một tam giác.
+                + In ra 'NO' nếu a, b, c không phải là cạnh của một tam giác.
+
+        Bài 3: Viết chương trình nhập vào số lớn nhất và số nhỏ nhất trong ba số a, b, c.
+            - Đầu vào: Ba số a, b, c; mỗi số cách nhau một dấu cách.
+            - Đầu ra: Hai số lần lượt là số lớn nhất và số nhỏ nhất trong ba số a, b, c cách nhau một dấu cách.
+
+        Bài 4: Viết chương trình nhập vào ba số a, b, c. Kiểm tra xem ba số đó là góc của tam giác thường, tam giác cân, tam giác vuông, tam giác vuông cân, tam giác đều hay không phải là ba góc của một tam giác.
+            - Đầu vào: Ba số a, b, c; mỗi số cách nhau một dấu cách.
+            - Đầu ra:
+                + In ra 'KHONG PHAI TAM GIAC' nếu ba số không phải ba góc của một tam giác.
+                + In ra 'TAM GIAC DEU' nếu ba số là ba góc của một tam giác đều.
+                + In ra 'TAM GIAC CAN' nếu ba số là ba góc của một tam giác cân.
+                + In ra 'TAM GIAC VUONG' nếu ba số là ba góc của một tam giác vuông.
+                + In ra 'TAM GIAC VUONG CAN' nếu ba số là ba góc của một tam giác vuông cân.
+                + In ra 'TAM GIAC THUONG' nếu ba số là ba góc của một tam giác thường.
+
+        Bài 5: Viết chương trình nhập vào ba số n, m và d lần lượt là hai cạnh của hình chữ nhật và cạnh của hình vuông. Kiểm tra hình nào có diện tích lớn hơn.
+            - Đầu vào: Ba số n, m, d; mỗi số cách nhau một dấu cách.
+            - Đầu ra:
+                + In ra 'HINH VUONG' nếu hình vuông có diện tích lớn hơn.
+                + In ra 'HINH CHU NHAT' nếu hình chữ nhật có diện tích lớn hơn.
+
+    Vòng lặp:
+        Bài 1: Cho ký tự x và số n. In ký tự x ra n lần.
+            - Đầu vào: Ký tự x và số n.
+            - Đầu ra: Dãy gồm n ký tự x không cách.
+            - Ví dụ:
+                A 5 --> AAAAA
+
+        Bài 2: Cho hai số a và b. In ra mọi số chẵn trong đoạn [a, b].
+            - Đầu vào: 2 số a, b cách nhau một dấu cách.
+            - Đầu ra: Mọi số chẵn trong đoạn [a, b], mỗi số cách nhau một dấu cách.
+            - Ví dụ:
+                1 10--> 2 4 6 8 10
+
+        Bài 3: Viết chương trình nhập vào hai số a, b. In ra hình chữ nhật bằng dấu '#' có chiều dài là a, chiều rộng là b.
+            - Đầu vào: Hai số a, b cách nhau một dấu cách.
+            - Đầu ra: Hình chữ nhật '#' có kích thước như đề bài.
+            - Ví dụ:
+                        ##
+                2 3 --> ##
+                        ##
+
+        Bài 4: Viết chương trình nhập vào số n. In ra tam giác '*' có kích thước hai cạnh bên bằng n.
+            - Đầu vào: 1 số n duy nhất.
+            - Đầu ra: Tam giác '*' có kích thước như đề bài.
+            - Ví dụ:
+                        *****
+                        ****
+                5   --> ***
+                        **
+                        *
+
+        Bài 5: Cho hai số n và k. In ra mọi ước số của k mà bé hơn n.
+            - Đầu vào: Số n và số k.
+            - Đầu ra: Dãy gồm các ước của k bé hơn số n.
+            - Ví dụ:
+                36 100  --> 1 2 4 5 10 20 25
+*/
+    --------------------
+Ngày 8 + 9 + 10 + 11: Ôn tập: Rẽ nhánh & Vòng lặp (Tiếp theo)
+    --------------------
+Ngày 12: Mảng cố định, xâu và vector (Gọi chung là mảng)
+/*
+    - Mảng cố định:
+        + Có độ dài cố định.
+        + Dùng cho nhiều kiểu dữ liệu khác nhau.
+        + Cách khai báo:
+            <Kiểu dữ liệu> <Tên biến>[ <Độ dài> ];
+                int so_nguyen[do_dai];
+                float so_thuc[10];
+            <Kiểu dữ liệu> <Tên biến>[<Độ dài>] = {<dữ liệu 1>, <dữ liệu 2>, <dữ liệu 3>, ..., <dữ liệu n>};
+                char ky_tu[5] = {'a', 'b', 'c', 'd', 'e'};
+    - Xâu:
+        + Có độ dài không cố định.
+        + Chỉ dùng cho kiểu dữ liệu ký tự.
+        + Cách khai báo:
+            string <Tên biến>;
+                string xau;
+            string <Tên biến> = "<Xâu ký tự>";
+                string xau = "Xau ky tu";
+            string <Tên biến> = <Một xâu ký tự được khai báo>;
+                string xau_2 = xau_1;
+    - Vector:
+        + Có độ dài không cố định, nhưng có thể tạo trước độ dài.
+        + Dùng cho nhiều kiểu dữ liệu khác nhau.
+        + Cách khai báo:
+            vector < <kiểu dữ liệu> > <Tên biến>;
+                vector <int> so_nguyen;
+            vector < <kiểu dữ liệu> > <Tên biến> = {<dữ liệu 1>, <dữ liệu 2>, <dữ liệu 3>, ..., <dữ liệu n>};
+                vector <char> ky_tu = {'a', 'b', 'c', 'd', 'e'};
+            vector < <kiểu dữ liệu> > <Tên biến> = <Một vector được khai báo có cùng kiểu dữ liệu>;
+                vector <int> nguyen = so_nguyen;
+            vector < <kiểu dữ liệu> > <Tên biến>(<độ dài>, <giá trị ban đầu>);
+            (<giá trị ban đầu> có thể để trống)
+                vector <bool> logic(5);
+                vector <string> xau_ky_tu(10, "Hello world!");
+    - Các đơn vị được lưu trữ trong mảng được gọi là các phần tử.
+    - Các phần tử được lưu trử trong các ô địa chỉ. (0x00F1A5)
+    - Có hai cách để truy cập vào các phần tử:
+        + Truy cập bằng chỉ số:
+            <Tên biến>[<Chỉ số>];
+                a[10];
+                s[i];
+        + Truy cập bằng địa chỉ.
+    - Các phần tử trong mảng được đánh thứ tự từ 0.
+*/

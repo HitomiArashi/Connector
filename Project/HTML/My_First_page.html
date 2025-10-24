@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Page</title>
+</head>
+<body>
+    <header>
+        <h1>
+            This is the most important heading! Which use <code>&lt;h1&gt;</code> tag.
+        </h1>
+        <h2>This is a less important heading, which now use <code>&lt;h2&gt;</code> tag.</h2>
+    <p>As less important heading, we use <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code> and <code>&lt;h6&gt;</code> tags. Don't use them randomly or without thinking because they have their meanings.</p>
+    </header>
+    <div id="intro">
+            <h2>Intro</h2>
+            <p>
+                There are a lot of different tags, each has a specific role. In this page, I will try to include everything I have learned from a Coursera course named "<a href="https://www.coursera.org/programs/fptu-new-2025-ij4ho">Introduction to HTML5</a>".
+            </p>
+        </div>
+        <div id = "ol_list">
+            <h2>About <code>&lt;ol&gt;</code> tag</h2>
+            <p>
+                <code>&lt;ol&gt;</code> is a special tags that help us list items or elements. In <code>&lt;ol&gt;</code> case, those items are listed with number, which is designed for ordered list. <br> This is the example for <code>&lt;ol&gt;</code> tag:
+            </p>
+            <ol>
+                <li>This is the first item.</li>
+                <li>This is the second item.</li>
+                <li>This is the third item.</li>
+            </ol>
+        </div>
+
+        <div id = "ul_list">
+            <h2>About <code>&lt;ul&gt;</code> tag</h2>
+            <p>
+                <code>&lt;ul&gt;</code> is also used to list items or elements. But when we use <code>&lt;ul&gt;</code> tag, we are meaning that this is an unordered list. <br>This is the example of <code>&lt;ul&gt;</code> tag:
+            </p>
+            <ul>
+                <li>This is an item.</li>
+                <li>This is another item.</li>
+                <li>This is the final item.</li>
+            </ul>
+        </div>
+
+        <div id = "more_tag">
+            <h2>Links that can be useful</h2>
+            <ol>
+                <li>
+                    Link 1: 
+                    <a href="https://www.wpkube.com/html5-cheat-sheet/" target="_blank" rel="n">
+                        www.wpkube.com/html5-cheat-sheet
+                    </a>
+                </li>
+                <li>
+                    Link 2: 
+                    <a href="https://htmlcheatsheet.com/" target="_blank" rel="n">
+                        htmlcheatsheet.com
+                    </a>
+                </li>
+                <li>
+                    Link 3: 
+                    <a href="https://webaim.org/resources/htmlcheatsheet/" target="_blank" rel="n">
+                        webaim.org/resources/htmlcheatsheet
+                    </a>
+                </li>
+                <li>
+                    This one is specially for semantic tags:
+                    <a href="https://www.w3schools.com/html/html5_semantic_elements.asp" target="_blank" rel="n">
+                        www.w3schools.com/html/html5_semantic_elements.asp
+                    </a>
+                </li>
+                <li>
+                    For special symbols: 
+                    <a href="https://www.w3schools.com/html/html_symbols.asp">
+                        https://www.w3schools.com/html/html_symbols.asp
+                    </a>
+                </li>
+                <li>
+                    This link is to validate, or check if your page code is correct:
+                    <a href="https://validator.w3.org/">
+                        https://validator.w3.org/
+                    </a>
+                </li>
+                <li>
+                    Image or icon can be added into your page, and these one will help you learn about those:
+                    <a href="https://www.w3schools.com/html/html_images.asp">
+                        https://www.w3schools.com/html/html_images.asp
+                    </a>
+                     and 
+                    <a href="https://www.w3schools.com/icons/">
+                        https://www.w3schools.com/icons/
+                    </a>
+                    .
+                </li>
+            </ol>
+        </div>
+
+        <div id = "hyperlink">
+            <h2>About hyperlink</h2>
+            <p>
+            Hyperlinks are a special element of the web, which makes it a "web". They are represented in HTML by <code>&lt;a&gt;</code>, which means anchor link.
+            These are some types of anchor link, or reference:
+            <ol>
+                <li>
+                    Absolute links/reference: usually point to another website. For example: <a href="https://en.wikipedia.org/wiki/Main_Page">https://en.wikipedia.org/wiki/Main_Page</a>
+                </li>
+                <li>
+                    Relative links/reference: usually point to another file within the same folder that contain the file of the web. For example: <a href="BasicTag.html">BasicTag.html</a>
+                </li>
+                <li>
+                    Embedded/Internal link/reference: this is a special one, as it doesn't bring you to any pages or links, nor create a new tab. Instead it will bring you to a point in the same page or web. It usually works with <code>&lt;id&gt;</code> attribute. These are examples:<br>
+                    <a href="#intro">
+                        Intro
+                    </a> <br>
+                    <a href="#ol_list">
+                        About <code>&lt;ol&gt;</code> tag
+                    </a> <br>
+                    <a href="#ul_list">
+                        About <code>&lt;ul&gt;</code> tag
+                    </a> <br>
+                    <a href="#more_tag">
+                        Links that can be useful
+                    </a> <br>
+                    <a href="#hyperlink">
+                        About hyperlink.
+                    </a>
+                </li>
+            </ol>
+            There is a special option about links: They don't always have to be text.
+            Image can also be made into a link, which is called graphical link.<br>
+            For example:<br>
+            <a href="https://www.ascii-code.com/"><img src="bangmaacsii.png" alt="ASCII Board"></a>
+            <br>
+            Anchors link can take a target attribute, which mean it can take action. Here are some of commons target an anchor can take:
+            <ol>
+                <li>
+                    <code>_self</code>: default action, or we can understand that it will open the link right in our current tab.
+                </li>
+                <li>
+                    <code>_blank</code>: this will make the link open in a new tab or window depend on how we want.
+                </li>
+                <li>
+                    <code>_top</code>
+                </li>
+                <li>
+                    <code>_parents</code>
+                </li>
+            </ol>
+        </div>
+
+        <div id="some-more-useful-tags">
+            <p>
+                We have a variety of tags that can help display text. They can be divided into two main groups: block and inline. Here are some useful tags from those groups:
+            </p>
+            <h4>Block</h4>
+            <ul>
+                <li>
+                    <b>&lt;div&gt;</b>: Defines a division or section in an HTML document. Used as a container for other elements.<br>
+                    <code>&lt;div&gt;This is a div block&lt;/div&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;p&gt;</b>: Represents a paragraph of text.<br>
+                    <code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;header&gt;</b>: Represents introductory content, typically a group of introductory or navigational aids.<br>
+                    <code>&lt;header&gt;Header content&lt;/header&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;footer&gt;</b>: Represents a footer for its nearest sectioning content or root element.<br>
+                    <code>&lt;footer&gt;Footer content&lt;/footer&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;section&gt;</b>: Defines a section in a document.<br>
+                    <code>&lt;section&gt;Section content&lt;/section&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;article&gt;</b>: Represents a self-contained composition in a document.<br>
+                    <code>&lt;article&gt;Article content&lt;/article&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;nav&gt;</b>: Defines navigation links.<br>
+                    <code>&lt;nav&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/nav&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;aside&gt;</b>: Represents content aside from the content it is placed in (like a sidebar).<br>
+                    <code>&lt;aside&gt;Sidebar content&lt;/aside&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;blockquote&gt;</b>: Indicates extended quotations.<br>
+                    <code>&lt;blockquote&gt;A famous quote.&lt;/blockquote&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;pre&gt;</b>: Displays preformatted text.<br>
+                    <code>&lt;pre&gt;  Preformatted text  &lt;/pre&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;hr&gt;</b>: Creates a thematic break (horizontal rule) in the page.<br>
+                    <code>&lt;hr&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;address&gt;</b>: Defines contact information for the author/owner of a document or article.<br>
+                    <code>&lt;address&gt;123 Main St, City, Country&lt;/address&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;details&gt;</b>: Specifies additional details that the user can view or hide on demand.<br>
+                    <code>&lt;details&gt;\n  &lt;summary&gt;More info&lt;/summary&gt;\n  This is hidden by default.&lt;/details&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;summary&gt;</b>: Defines a visible heading for a &lt;details&gt; element.<br>
+                    <code>&lt;details&gt;\n  &lt;summary&gt;Click to expand&lt;/summary&gt;\n  Hidden content here.&lt;/details&gt;</code>
+                </li>
+            </ul>
+            <h4>Live Demo of Block-level Tags</h4>
+            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                <div style="background:#f0f0f0; padding:5px;">This is a &lt;div&gt; block</div>
+                <p>This is a &lt;p&gt; paragraph.</p>
+                <header style="background:#e0e0ff; padding:5px;">Header content (&lt;header&gt;)</header>
+                <section style="background:#f9f9e0; padding:5px;">Section content (&lt;section&gt;)</section>
+                <article style="background:#e0ffe0; padding:5px;">Article content (&lt;article&gt;)</article>
+                <nav style="background:#ffe0e0; padding:5px;"><a href="#">Home</a> | <a href="#">About</a> (&lt;nav&gt;)</nav>
+                <aside style="background:#fff0e0; padding:5px;">Sidebar content (&lt;aside&gt;)</aside>
+                <blockquote style="border-left:4px solid #888; margin:10px 0; padding-left:10px;">A famous quote. (&lt;blockquote&gt;)</blockquote>
+                <pre style="background:#222; color:#fff; padding:5px;">  Preformatted text  (&lt;pre&gt;)</pre>
+                <hr>
+                <address style="font-style:italic;">123 Main St, City, Country (&lt;address&gt;)</address>
+                <details>
+                    <summary>More info (&lt;summary&gt; inside &lt;details&gt;)</summary>
+                    This is hidden by default. (&lt;details&gt;)
+                </details>
+                <footer style="background:#e0e0e0; padding:5px;">Footer content (&lt;footer&gt;)</footer>
+            </div>
+
+            <!-- Inline tag section: placed after block-level live demo -->
+            <h4>Inline</h4>
+            <ul>
+                <li>
+                    <b>&lt;span&gt;</b>: A generic inline container for phrasing content.<br>
+                    <code>&lt;span style=&quot;color:blue;&quot;&gt;This is a span&lt;/span&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;cite&gt;</b>: Represents the title of a work (book, website, etc.).<br>
+                    <code>&lt;cite&gt;HTML5 Specification&lt;/cite&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;abbr&gt;</b>: Represents an abbreviation or acronym, optionally with a full description.<br>
+                    <code>&lt;abbr title=&quot;World Health Organization&quot;&gt;WHO&lt;/abbr&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;time&gt;</b>: Represents a specific period in time.<br>
+                    <code>&lt;time datetime=&quot;2025-08-09&quot;&gt;August 9, 2025&lt;/time&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;code&gt;</b>: Displays a fragment of computer code.<br>
+                    <code>&lt;code&gt;console.log('Hello')&lt;/code&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;sub&gt;</b>: Subscript text.<br>
+                    <code>H&lt;sub&gt;2&lt;/sub&gt;O</code>
+                </li>
+                <li>
+                    <b>&lt;sup&gt;</b>: Superscript text.<br>
+                    <code>x&lt;sup&gt;2&lt;/sup&gt;</code>
+                </li>
+            </ul>
+            <h4>Live Demo of Inline Tags</h4>
+            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                <span style="color:blue;">This is a &lt;span&gt; example</span><br>
+                <cite>HTML5 Specification (&lt;cite&gt;)</cite><br>
+                <abbr title="World Health Organization">WHO</abbr> (&lt;abbr&gt;)<br>
+                <time datetime="2025-08-09">August 9, 2025</time> (&lt;time&gt;)<br>
+                <code>console.log('Hello')</code> (&lt;code&gt;)<br>
+                H<sub>2</sub>O (&lt;sub&gt;)<br>
+                x<sup>2</sup> (&lt;sup&gt;)<br>
+            </div>
+
+            <!-- Tags that need more section: placed after Live Demo of Inline Tags -->
+            <h4>Tags that need more</h4>
+            <ul>
+                <li>
+                    <b>&lt;button&gt;</b>: Represents a clickable button.<br>
+                    <code>&lt;button&gt;Click me!&lt;/button&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;meter&gt;</b>: Represents a scalar measurement within a known range.<br>
+                    <code>&lt;meter value=&quot;0.7&quot;&gt;70%&lt;/meter&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;progress&gt;</b>: Displays the progress of a task.<br>
+                    <code>&lt;progress value=&quot;50&quot; max=&quot;100&quot;&gt;50%&lt;/progress&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;iframe&gt;</b>: Embeds another HTML page within the current page.<br>
+                    <code>&lt;iframe src=&quot;https://www.example.com&quot; width=&quot;200&quot; height=&quot;50&quot;&gt;&lt;/iframe&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;bdo&gt;</b>: Overrides the current text direction.<br>
+                    <code>&lt;bdo dir=&quot;rtl&quot;&gt;Right to left&lt;/bdo&gt; | &lt;bdo dir=&quot;ltr&quot;&gt;Left to right&lt;/bdo&gt;</code>
+                </li>
+                <li>
+                    <b>&lt;map&gt;</b> and <b>&lt;area&gt;</b>: Define image maps and clickable areas on images.<br>
+                    <code>&lt;img src=&quot;bangmaacsii.png&quot; usemap=&quot;#asciimap&quot;&gt;<br>&lt;map name=&quot;asciimap&quot;&gt;<br>&lt;area shape=&quot;rect&quot; coords=&quot;0,0,50,50&quot; href=&quot;https://www.ascii-code.com/&quot; alt=&quot;ASCII&quot;&gt;<br>&lt;/map&gt;</code>
+                </li>
+            </ul>
+            <h4>Live Demo of Tags that need more</h4>
+            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                <button>Click me!</button><br>
+                <meter value="0.7">70%</meter><br>
+                <progress value="50" max="100">50%</progress><br>
+                <iframe src="https://www.example.com" width="200" height="50" title="iframe demo"></iframe><br>
+                <bdo dir="rtl">Right to left</bdo> | <bdo dir="ltr">Left to right</bdo><br>
+                <img src="bangmaacsii.png" usemap="#asciimap" alt="ASCII Map" width="100"><br>
+                <map name="asciimap">
+                    <area shape="rect" coords="0,0,50,50" href="https://www.ascii-code.com/" alt="ASCII">
+                </map>
+            </div>
+        </div>
+    </body>
+</html>
