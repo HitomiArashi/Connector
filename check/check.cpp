@@ -36,6 +36,7 @@ inline void solve()
     int a, b;
     cin >> a >> b;
     cout << a + b;
+    cout << el;
 }
 
 //Update for testing

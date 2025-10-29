@@ -1,0 +1,31 @@
+# Build artifacts
+*.o
+*.out
+*.exe
+*.class
+*.jar
+
+# Temp files
+*.tmp
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# C++ temp files from Code Runner
+tempCodeRunnerFile.cpp
+
+# Java class files
+/bin/
+*/bin/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Others
+node_modules/
