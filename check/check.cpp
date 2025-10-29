@@ -34,16 +34,7 @@ int main()
 inline void solve()
 {
     int n;
-    cin >> n;
-    if (n % 4 == 0)
-    {
-        cout << n / 4;
-    }
-    else
-    {
-        cout << n / 4 + 1;
-    }
-    cout << el;
+    cout << n;
 }
 
 //Update for testing
