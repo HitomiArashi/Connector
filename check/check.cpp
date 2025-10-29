@@ -33,8 +33,9 @@ int main()
 /*sol*/
 inline void solve()
 {
-    int n;
-    cout << n;
+    int a, b;
+    cin >> a >> b;
+    cout << a + b;
 }
 
 //Update for testing
