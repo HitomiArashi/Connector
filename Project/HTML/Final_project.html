@@ -1,37 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project</title>
+  <meta charset="UTF-8">
+  <title>🎄 Merry Christmas Như</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      overflow:hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #020824, #071a52);
+      color:white;
+      text-align:center;
+    }
+
+    /* ===== Snow ===== */
+    canvas{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+    }
+
+    /* ===== Container ===== */
+    .container{
+      position:relative;
+      z-index:2;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    h1{
+      font-size:clamp(28px,5vw,48px);
+      margin-bottom:10px;
+      text-shadow:0 0 20px #7cf7ff;
+    }
+
+    p{
+      max-width:600px;
+      line-height:1.7;
+      font-size:17px;
+      opacity:0.95;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 18px;
+      border:none;
+      border-radius:14px;
+      font-weight:bold;
+      cursor:pointer;
+      background:linear-gradient(180deg,#fff,#dff7ff);
+      box-shadow:0 10px 30px rgba(124,247,255,.3);
+    }
+
+    /* ===== Tree ===== */
+    .tree{
+      position:relative;
+      width:260px;
+      height:420px;
+      margin-top:30px;
+    }
+
+    .star{
+      position:absolute;
+      top:-10px;
+      left:50%;
+      transform:translateX(-50%);
+      width:50px;
+      height:50px;
+      background:gold;
+      clip-path:polygon(
+        50% 0%, 61% 35%, 98% 35%,
+        68% 57%, 79% 91%,
+        50% 70%, 21% 91%,
+        32% 57%, 2% 35%,
+        39% 35%
+      );
+      box-shadow:0 0 25px gold;
+      animation:star 2s infinite;
+    }
+
+    @keyframes star{
+      50%{transform:translateX(-50%) scale(1.1)}
+    }
+
+    .layer{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      width:0;
+      height:0;
+      border-left:130px solid transparent;
+      border-right:130px solid transparent;
+      border-bottom:140px solid #1fd36a;
+    }
+
+    .l1{top:60px;transform:translateX(-50%) scale(.9)}
+    .l2{top:130px;}
+    .l3{top:220px;transform:translateX(-50%) scale(1.1)}
+
+    .trunk{
+      position:absolute;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:60px;
+      height:80px;
+      background:#5a351e;
+      border-radius:10px;
+    }
+
+    .light{
+      position:absolute;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      animation:blink 1.5s infinite alternate;
+      box-shadow:0 0 15px currentColor;
+    }
+
+    @keyframes blink{
+      to{opacity:0.3}
+    }
+
+    /* ===== Modal ===== */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:10;
+    }
+
+    .modal.open{display:flex}
+
+    .letter{
+      background:rgba(255,255,255,.1);
+backdrop-filter:blur(10px);
+      padding:22px;
+      border-radius:20px;
+      max-width:600px;
+      box-shadow:0 20px 50px rgba(0,0,0,.5);
+    }
+
+    .letter h2{margin-top:0}
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>My Amazing Final Project</h1>
-        <nav>
-            <a href="https://www.w3schools.com/" target="_blank" rel="noopener">Visit W3Schools</a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>Gallery</h2>
-            <ul>
-                <li><img src="bangmaacsii.png" alt="ASCII Board Example" width="120"></li>
-                <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png" alt="Sample PNG" width="120"></li>
-                <li><img src="https://www.w3schools.com/html/img_chania.jpg" alt="Chania" width="120"></li>
-            </ul>
-        </section>
-        <section>
-            <h2>My Favorite Programming Languages</h2>
-            <ol>
-                <li>Python</li>
-                <li>JavaScript</li>
-                <li>HTML &amp; CSS</li>
-            </ol>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 My Final Project. All rights reserved.</p>
-    </footer>
+
+<canvas id="snow"></canvas>
+
+<div class="container">
+  <h1>🎁 Merry Christmas Như 🎄</h1>
+  <p>
+    Noel này anh không mong gì nhiều,  
+    chỉ mong Như luôn vui, luôn cười,  
+    và luôn ở trong vòng tay anh mỗi khi đông về. 💖
+  </p>
+
+  <button onclick="openLetter()">Mở thiệp cho Như 💌</button>
+
+  <div class="tree">
+    <div class="star"></div>
+    <div class="layer l1"></div>
+    <div class="layer l2"></div>
+    <div class="layer l3"></div>
+    <div class="trunk"></div>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="letter">
+    <h2>Gửi Như ❤️</h2>
+    <p id="text"></p>
+    <p style="text-align:right;margin-top:15px;">— Anh 💕</p>
+    <button onclick="closeLetter()">Đóng</button>
+  </div>
+</div>
+
+<script>
+/* ===== Letter text ===== */
+const letter = `
+Như ơi,
+Giáng Sinh này anh chỉ muốn nói một điều thôi:
+Cảm ơn em vì đã đến bên anh,
+làm cho những ngày bình thường trở nên ấm áp hơn rất nhiều.
+
+Chúc em một mùa Noel an lành,
+tim luôn ấm, mắt luôn cười,
+và tình yêu của tụi mình thì luôn ở đó — nhẹ nhàng nhưng bền lâu. 🎄✨
+`;
+
+/* ===== Modal ===== */
+function openLetter(){
+  document.getElementById("text").innerText = letter;
+  document.getElementById("modal").classList.add("open");
+}
+function closeLetter(){
+  document.getElementById("modal").classList.remove("open");
+}
+
+/* ===== Snow ===== */
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.onresize = resize;
+resize();
+
+const snowflakes = Array.from({length:150},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*2+1,
+  v:Math.random()*1.5+0.5
+}));
+
+function snow(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+  snowflakes.forEach(f=>{
+    ctx.beginPath();
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    ctx.fill();
+    f.y+=f.v;
+    if(f.y>canvas.height){
+      f.y=0;
+      f.x=Math.random()*canvas.width;
+    }
+  });
+  requestAnimationFrame(snow);
+}
+snow();
+
+/* ===== Lights ===== */
+const tree = document.querySelector(".tree");
+["red","gold","cyan","pink","lime"].forEach((c,i)=>{
+  for(let j=0;j<5;j++){
+    const d=document.createElement("div");
+    d.className="light";
+    d.style.color=c;
+    d.style.background=c;
+    d.style.left=Math.random()*240+"px";
+    d.style.top=(100+i*60+Math.random()*40)+"px";
+    d.style.animationDelay=Math.random()+"s";
+    tree.appendChild(d);
+  }
+});
+</script>
+
 </body>
 </html>
