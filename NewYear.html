@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bốc Thăm Lì Xì Tết</title>
+
+  <!--
+    =========================================
+    CSS: Lunar New Year theme (red/gold), responsive,
+    falling apricot blossoms + subtle fireworks.
+    =========================================
+  -->
+  <style>
+    :root{
+      --red:#b30000;
+      --red2:#d10000;
+      --gold:#ffd24d;
+      --gold2:#ffb300;
+      --ink:#2b1a12;
+      --panel: rgba(255,255,255,.10);
+      --panel2: rgba(255,255,255,.18);
+      --border: rgba(255,255,255,.20);
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100svh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #fff;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(255,210,77,.25), transparent 55%),
+        radial-gradient(900px 600px at 85% 25%, rgba(255,179,0,.18), transparent 55%),
+        radial-gradient(1200px 800px at 50% 90%, rgba(0,0,0,.40), transparent 60%),
+        linear-gradient(180deg, #7a0000 0%, #b30000 35%, #5f0000 100%);
+      overflow-x:hidden;
+    }
+
+    /* Subtle texture overlay */
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.06), transparent 35%),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,.04), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,.03), transparent 45%);
+      pointer-events:none;
+      mix-blend-mode: screen;
+      opacity:.9;
+    }
+
+    .wrap{
+      position:relative;
+      z-index:2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 16px 64px;
+    }
+
+    header{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      text-align:center;
+      margin-top: 6px;
+      margin-bottom: 18px;
+    }
+
+    .title{
+      font-size: clamp(28px, 4.6vw, 48px);
+      letter-spacing: .5px;
+      margin:0;
+      line-height:1.1;
+      text-shadow: 0 8px 18px rgba(0,0,0,.35);
+    }
+
+    .subtitle{
+      margin:0;
+      font-size: clamp(14px, 2vw, 16px);
+      opacity:.95;
+      color: rgba(255,255,255,.92);
+    }
+
+    .panel{
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 860px){
+      .main{ grid-template-columns: 1fr; }
+    }
+
+    /* Left: envelope stage */
+    .stage{
+      padding: 18px 16px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .stage-top{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.18);
+      font-size: 13px;
+      opacity:.95;
+    }
+
+    .badge .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--gold2));
+      box-shadow: 0 0 16px rgba(255,210,77,.5);
+      display:inline-block;
+    }
+
+    .prob{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      font-size: 13px;
+      opacity:.92;
+    }
+
+    .prob code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.16);
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+
+    /* Lucky envelope */
+    .envelope-area{
+      display:grid;
+      place-items:center;
+      padding: 16px 10px 8px;
+      min-height: 360px;
+    }
+
+    .envelope{
+      width: min(320px, 78vw);
+      aspect-ratio: 3/4;
+      border-radius: 22px;
+      position:relative;
+      transform: translateZ(0);
+      cursor: pointer;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      background:
+        linear-gradient(180deg, #e20000 0%, #b80000 60%, #950000 100%);
+      border: 1px solid rgba(255,255,255,.16);
+      overflow:hidden;
+    }
+
+    /* gold trim */
+    .envelope:before{
+      content:"";
+      position:absolute;
+      inset: 12px;
+      border-radius: 16px;
+      border: 2px solid rgba(255,210,77,.75);
+      box-shadow: inset 0 0 0 1px rgba(255,179,0,.25);
+      pointer-events:none;
+    }
+
+    /* subtle pattern */
+    .envelope:after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,210,77,.08), transparent 40%),
+        radial-gradient(circle at 65% 60%, rgba(255,210,77,.06), transparent 45%),
+        repeating-linear-gradient(45deg, rgba(255,210,77,.05) 0 8px, transparent 8px 18px);
+      transform: rotate(18deg);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    /* Shake on hover */
+    .envelope:hover{
+      animation: shake .55s ease-in-out infinite;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,.45));
+    }
+    @keyframes shake{
+      0%{ transform: translate(0,0) rotate(0deg); }
+      25%{ transform: translate(1px,-2px) rotate(-1.2deg); }
+      50%{ transform: translate(-2px,1px) rotate(1.3deg); }
+      75%{ transform: translate(2px,2px) rotate(-.8deg); }
+      100%{ transform: translate(0,0) rotate(0deg); }
+    }
+
+    .seal{
+      position:absolute;
+      left:50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, #fff, var(--gold) 35%, var(--gold2) 70%);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,.35),
+        inset 0 2px 8px rgba(255,255,255,.55);
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(0,0,0,.12);
+    }
+
+    .seal span{
+      font-weight: 800;
+      color: #7a0000;
+      font-size: 40px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.35);
+      letter-spacing: 1px;
+      transform: rotate(-6deg);
+      user-select:none;
+    }
+
+    .spark{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .spark i{
+      position:absolute;
+      width: 6px; height: 6px;
+      border-radius:50%;
+      background: rgba(255,210,77,.95);
+      box-shadow: 0 0 16px rgba(255,210,77,.55);
+      opacity:.9;
+      animation: floatSpark 2.6s ease-in-out infinite;
+    }
+
+    .spark i:nth-child(1){ left:18%; top:18%; animation-delay: .0s; }
+    .spark i:nth-child(2){ left:78%; top:24%; animation-delay: .4s; }
+    .spark i:nth-child(3){ left:22%; top:76%; animation-delay: .9s; }
+    .spark i:nth-child(4){ left:75%; top:78%; animation-delay: 1.2s; }
+    .spark i:nth-child(5){ left:50%; top:10%; animation-delay: 1.6s; }
+
+    @keyframes floatSpark{
+      0%,100%{ transform: translateY(0) scale(1); opacity:.8; }
+      50%{ transform: translateY(-10px) scale(1.25); opacity:1; }
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      transition: transform .08s ease, filter .2s ease, opacity .2s ease;
+      min-width: 150px;
+    }
+
+    .btn-primary{
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold2) 100%);
+      color: #5a0000;
+      box-shadow: 0 16px 30px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.25);
+    }
+    .btn-primary:hover{ filter: brightness(1.05); }
+    .btn-primary:active{ transform: translateY(1px) scale(.99); }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.08);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .btn-ghost:hover{ background: rgba(255,255,255,.12); }
+    .btn-ghost:active{ transform: translateY(1px) scale(.99); }
+
+    /* Right: history & tips */
+    .side{
+      padding: 18px 16px 16px;
+    }
+
+    .side h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+
+    .note{
+      margin: 0 0 12px;
+      opacity:.92;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.14);
+    }
+
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 420px;
+    }
+
+    th, td{
+      padding: 10px 12px;
+      text-align:left;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    th{
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 13px;
+      letter-spacing: .2px;
+      opacity:.95;
+    }
+
+    tr:last-child td{ border-bottom:0; }
+
+    .money{
+      font-weight: 800;
+      color: rgba(255,210,77,.98);
+      text-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Modal */
+    .modalBackdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 50;
+      padding: 18px;
+    }
+    .modalBackdrop.show{ display:flex; }
+
+    .modal{
+      width: min(520px, 92vw);
+      border-radius: 20px;
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.10));
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position:relative;
+      overflow:hidden;
+      animation: pop .22s ease-out;
+    }
+    @keyframes pop{
+      from{ transform: translateY(8px) scale(.98); opacity: .6; }
+      to{ transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal .topRow{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .modal h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+
+    .close{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display:grid;
+      place-items:center;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size: 20px;
+      line-height: 1;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .modal p{
+      margin: 8px 0 0;
+      opacity:.95;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .modal .bigMoney{
+      margin: 10px 0 8px;
+      font-size: clamp(34px, 6vw, 48px);
+      font-weight: 900;
+      color: rgba(255,210,77,1);
+      text-shadow: 0 10px 26px rgba(0,0,0,.35);
+      letter-spacing: .5px;
+    }
+
+    .modal .hint{
+      font-size: 13px;
+      opacity:.9;
+    }
+
+    .confetti{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.85;
+      mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
+    }
+
+    /* Canvas layers (background effects) */
+    canvas.fx{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      opacity:.85;
+      font-size: 12px;
+    }
+
+    .kbd{
+      display:inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background effects (Canvas) -->
+  <canvas class="fx" id="blossomCanvas" aria-hidden="true"></canvas>
+  <canvas class="fx" id="fireworkCanvas" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <header>
+      <h1 class="title">🎊 Bốc Thăm Lì Xì Tết 🎊</h1>
+      <p class="subtitle">Bốc nhẹ tay thôi… coi chừng “nhân phẩm” lên tiếng 😄</p>
+    </header>
+
+    <section class="main">
+      <!-- LEFT: Envelope + actions -->
+      <div class="panel stage">
+        <div class="stage-top">
+          <div class="badge"><span class="dot"></span> Lunar New Year Mode</div>
+          <div class="prob">
+            Tỉ lệ: <code>20k 40% • 50k 25% • 70k 15% • 100k 10% • 150k 6% • 200k 4%</code>
+          </div>
+        </div>
+
+        <div class="envelope-area">
+          <!-- Envelope clickable -->
+          <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Bao lì xì may mắn">
+            <div class="spark" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="seal" aria-hidden="true"><span>福</span></div>
+          </div>
+
+          <div class="actions">
+            <button class="btn-primary" id="drawBtn">🧧 Bốc Lì Xì</button>
+            <button class="btn-ghost" id="resetBtn" title="Xóa lịch sử bốc thăm">🧹 Xóa lịch sử</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: History -->
+      <aside class="panel side">
+        <h3>📜 Lịch sử bốc</h3>
+        <p class="note">
+          Mỗi lần bốc sẽ ghi lại <b>STT</b>, <b>Thời gian</b>, và <b>Số tiền</b>.
+          Mẹo: nhấn phím <span class="kbd">Esc</span> để đóng thông báo.
+        </p>
+
+        <div class="tableWrap" aria-label="Bảng lịch sử bốc thăm">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:72px;">STT</th>
+                <th>Thời gian</th>
+                <th>Số tiền</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody">
+              <tr>
+                <td colspan="3" style="opacity:.8;">Chưa có lượt bốc nào. Hãy bốc thử để khai xuân 🎉</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <footer>
+          Gợi ý: Bạn có thể chỉnh <b>tỉ lệ</b> trong phần <span class="kbd">PRIZE_CONFIG</span> (JS).
+        </footer>
+      </aside>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div class="modalBackdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="confetti" id="confettiLayer" aria-hidden="true"></div>
+
+      <div class="topRow">
+        <h2 id="modalTitle">Chúc mừng!</h2>
+        <div class="close" id="closeModal" aria-label="Đóng">&times;</div>
+      </div>
+
+      <div class="bigMoney" id="modalMoney">0đ</div>
+      <p id="modalText">Bạn vừa nhận được một lì xì may mắn. Chúc bạn năm mới an khang thịnh vượng! ✨</p>
+      <p class="hint">Tip: Click ra ngoài nền tối để đóng.</p>
+    </div>
+  </div>
+
+  <!--
+    =========================================
+    JavaScript: Probability draw + history + effects + sound hook
+    =========================================
+  -->
+  <script>
+    /*************************************************************
+     * 1) CONFIG: Prize amounts and EXACT probabilities
+     *    - probabilities must sum to 1.0 (100%)
+     *************************************************************/
+    const PRIZE_CONFIG = [
+      { amount: 20000,  p: 0.40 },
+      { amount: 50000,  p: 0.25 },
+      { amount: 70000,  p: 0.15 },
+      { amount: 100000, p: 0.10 },
+      { amount: 150000, p: 0.06 },
+      { amount: 200000, p: 0.04 },
+    ];
+
+    // Validate probabilities (dev sanity check)
+    (function validateProb(){
+      const sum = PRIZE_CONFIG.reduce((s, x) => s + x.p, 0);
+      const ok = Math.abs(sum - 1) < 1e-9;
+      if(!ok){
+        console.warn("⚠️ Tổng xác suất không bằng 1.0. Hiện tại =", sum);
+      }
+    })();
+
+    /*************************************************************
+     * 2) Helpers
+     *************************************************************/
+    const fmtMoney = (n) => n.toLocaleString("vi-VN") + "đ";
+    const nowTime  = () => new Date().toLocaleString("vi-VN");
+
+    // Weighted random selection using cumulative distribution
+    function pickPrizeWeighted(){
+      const r = Math.random(); // 0..1
+      let acc = 0;
+      for(const item of PRIZE_CONFIG){
+        acc += item.p;
+        if(r < acc) return item.amount;
+      }
+      // Fallback due to floating point edge cases
+      return PRIZE_CONFIG[PRIZE_CONFIG.length - 1].amount;
+    }
+
+    /*************************************************************
+     * 3) DOM hooks
+     *************************************************************/
+    const drawBtn = document.getElementById("drawBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const envelope = document.getElementById("envelope");
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const closeModal = document.getElementById("closeModal");
+    const modalMoney = document.getElementById("modalMoney");
+
+    const historyBody = document.getElementById("historyBody");
+
+    /*************************************************************
+     * 4) History store (in-memory). You can extend to localStorage if you want.
+     *************************************************************/
+    const history = []; // { idx, time, amount }
+
+    function renderHistory(){
+      if(history.length === 0){
+        historyBody.innerHTML = `
+          <tr>
+            <td colspan="3" style="opacity:.8;">Chưa có lượt bốc nào. Hãy bốc thử để khai xuân 🎉</td>
+          </tr>`;
+        return;
+      }
+
+      historyBody.innerHTML = history.map(row => `
+        <tr>
+          <td>${row.idx}</td>
+          <td>${row.time}</td>
+          <td class="money">${fmtMoney(row.amount)}</td>
+        </tr>
+      `).join("");
+    }
+
+    /*************************************************************
+     * 5) Modal controls
+     *************************************************************/
+    function openModal(amount){
+      modalMoney.textContent = fmtMoney(amount);
+      modalBackdrop.classList.add("show");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+      spawnConfetti(); // light celebration
+    }
+
+    function hideModal(){
+      modalBackdrop.classList.remove("show");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+      clearConfetti();
+    }
+
+    modalBackdrop.addEventListener("click", (e) => {
+      if(e.target === modalBackdrop) hideModal();
+    });
+    closeModal.addEventListener("click", hideModal);
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") hideModal();
+    });
+
+    /*************************************************************
+     * 6) Sound hook (placeholder)
+     *  - Replace 'YOUR_SOUND_FILE.mp3' with your own file path.
+     *  - Or keep it commented if you don't want sound.
+     *************************************************************/
+    // const sound = new Audio("YOUR_SOUND_FILE.mp3");
+    // sound.volume = 0.6;
+    function playSound(){
+      // Uncomment if you used Audio above:
+      // sound.currentTime = 0;
+      // sound.play().catch(()=>{});
+    }
+
+    /*************************************************************
+     * 7) Draw action (button + click envelope)
+     *************************************************************/
+    function doDraw(){
+      // Small "open envelope" animation by temporarily scaling
+      envelope.animate(
+        [
+          { transform: "scale(1)" },
+          { transform: "scale(1.03)" },
+          { transform: "scale(1)" }
+        ],
+        { duration: 360, easing: "ease-out" }
+      );
+
+      const amount = pickPrizeWeighted();
+
+      // Save history
+      history.unshift({
+        idx: history.length + 1,
+        time: nowTime(),
+        amount
+      });
+
+      renderHistory();
+      playSound();
+      openModal(amount);
+    }
+
+    drawBtn.addEventListener("click", doDraw);
+    envelope.addEventListener("click", doDraw);
+    envelope.addEventListener("keydown", (e) => {
+      if(e.key === "Enter" || e.key === " ") doDraw();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      history.length = 0;
+      renderHistory();
+    });
+
+    /*************************************************************
+     * 8) Background Effect A: Falling apricot blossoms (hoa mai rơi)
+     *************************************************************/
+    const blossomCanvas = document.getElementById("blossomCanvas");
+    const bctx = blossomCanvas.getContext("2d");
+    let blossoms = [];
+
+    function resizeCanvas(){
+      blossomCanvas.width = window.innerWidth * devicePixelRatio;
+      blossomCanvas.height = window.innerHeight * devicePixelRatio;
+      bctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+
+      fireworkCanvas.width = window.innerWidth * devicePixelRatio;
+      fireworkCanvas.height = window.innerHeight * devicePixelRatio;
+      fctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    window.addEventListener("resize", resizeCanvas);
+
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
+    function initBlossoms(){
+      const count = Math.floor(Math.min(70, Math.max(30, window.innerWidth / 18)));
+      blossoms = Array.from({length: count}, () => ({
+        x: rand(0, window.innerWidth),
+        y: rand(-window.innerHeight, 0),
+        r: rand(3, 7),
+        vy: rand(0.6, 1.8),
+        vx: rand(-0.35, 0.35),
+        rot: rand(0, Math.PI * 2),
+        vr: rand(-0.02, 0.02),
+        wobble: rand(0, Math.PI * 2)
+      }));
+    }
+
+    function drawPetal(x, y, r, rot){
+      bctx.save();
+      bctx.translate(x, y);
+      bctx.rotate(rot);
+
+      // Petal-like shape
+      bctx.beginPath();
+      bctx.moveTo(0, -r);
+      bctx.quadraticCurveTo(r, -r*0.2, 0, r);
+      bctx.quadraticCurveTo(-r, -r*0.2, 0, -r);
+      bctx.closePath();
+
+      const grad = bctx.createRadialGradient(0, 0, 1, 0, 0, r*1.6);
+      grad.addColorStop(0, "rgba(255, 230, 120, .95)");
+      grad.addColorStop(0.55, "rgba(255, 210, 77, .85)");
+      grad.addColorStop(1, "rgba(255, 179, 0, .35)");
+
+      bctx.fillStyle = grad;
+      bctx.fill();
+
+      bctx.restore();
+    }
+
+    function blossomLoop(){
+      bctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for(const p of blossoms){
+        p.wobble += 0.015;
+        p.x += p.vx + Math.sin(p.wobble) * 0.25;
+        p.y += p.vy;
+        p.rot += p.vr;
+
+        drawPetal(p.x, p.y, p.r, p.rot);
+
+        if(p.y > window.innerHeight + 10){
+          p.y = rand(-120, -10);
+          p.x = rand(0, window.innerWidth);
+        }
+      }
+
+      requestAnimationFrame(blossomLoop);
+    }
+
+    /*************************************************************
+     * 9) Background Effect B: Subtle fireworks (light bursts)
+     *************************************************************/
+    const fireworkCanvas = document.getElementById("fireworkCanvas");
+    const fctx = fireworkCanvas.getContext("2d");
+    let sparks = [];
+    let fwTimer = 0;
+
+    function spawnFirework(){
+      const cx = rand(window.innerWidth * 0.15, window.innerWidth * 0.85);
+      const cy = rand(window.innerHeight * 0.10, window.innerHeight * 0.45);
+      const n = Math.floor(rand(18, 30));
+      for(let i=0;i<n;i++){
+        const ang = (Math.PI * 2) * (i / n) + rand(-0.08, 0.08);
+        const spd = rand(0.8, 2.0);
+        sparks.push({
+          x: cx, y: cy,
+          vx: Math.cos(ang) * spd,
+          vy: Math.sin(ang) * spd,
+          life: rand(40, 70),
+          r: rand(1.2, 2.2)
+        });
+      }
+    }
+
+    function fireworkLoop(){
+      fctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      fwTimer++;
+      // spawn occasionally
+      if(fwTimer % 70 === 0 && sparks.length < 220){
+        spawnFirework();
+      }
+
+      // draw sparks
+      for(let i=sparks.length - 1; i>=0; i--){
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vx *= 0.985;
+        s.vy *= 0.985;
+        s.life -= 1;
+
+        const a = Math.max(0, Math.min(1, s.life / 70));
+        fctx.beginPath();
+        fctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        fctx.fillStyle = `rgba(255, 210, 77, ${0.55 * a})`;
+        fctx.fill();
+
+        if(s.life <= 0) sparks.splice(i, 1);
+      }
+
+      requestAnimationFrame(fireworkLoop);
+    }
+
+    /*************************************************************
+     * 10) Confetti inside modal (simple DOM confetti)
+     *************************************************************/
+    const confettiLayer = document.getElementById("confettiLayer");
+    let confettiEls = [];
+
+    function spawnConfetti(){
+      clearConfetti();
+      const count = 26;
+      for(let i=0;i<count;i++){
+        const el = document.createElement("div");
+        el.style.position = "absolute";
+        el.style.left = (10 + Math.random() * 80) + "%";
+        el.style.top  = (-10 - Math.random() * 40) + "%";
+        el.style.width = (6 + Math.random() * 10) + "px";
+        el.style.height = (10 + Math.random() * 16) + "px";
+        el.style.borderRadius = "4px";
+        // Red/Gold palette
+        const isGold = Math.random() > 0.45;
+        el.style.background = isGold ? "rgba(255, 210, 77, .95)" : "rgba(226, 0, 0, .85)";
+        el.style.boxShadow = "0 10px 22px rgba(0,0,0,.18)";
+        el.style.opacity = "0.95";
+        el.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+        el.style.animation = `fall ${900 + Math.random()*700}ms ease-out forwards`;
+
+        confettiLayer.appendChild(el);
+        confettiEls.push(el);
+      }
+
+      // Inject keyframes once (safe)
+      if(!document.getElementById("confettiKeyframes")){
+        const style = document.createElement("style");
+        style.id = "confettiKeyframes";
+        style.textContent = `
+          @keyframes fall{
+            to{
+              transform: translateY(280px) rotate(120deg);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+
+    function clearConfetti(){
+      confettiEls.forEach(el => el.remove());
+      confettiEls = [];
+    }
+
+    /*************************************************************
+     * 11) Boot
+     *************************************************************/
+    resizeCanvas();
+    initBlossoms();
+    blossomLoop();
+    fireworkLoop();
+    renderHistory();
+  </script>
+</body>
+</html>
+
